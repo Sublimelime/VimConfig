@@ -66,6 +66,9 @@ command! Start tab sview ~/.vim/start.txt
 " Config for autoclose
 let g:AutoClosePairs = {'(': ')', '{': '}', '[': ']', '"': '"'}
 
+" Config for Bullets
+let g:bullets_enabled_file_types = ['markdown', 'mediawiki'] 
+
 " Config for NeatStatus
 let g:NeatStatusLine_color_filetype = 'guifg=#ffffff guibg=#000000 gui=bold ctermfg=15 ctermbg=9 cterm=bold'
 
