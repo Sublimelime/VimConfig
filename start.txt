@@ -1,0 +1,47 @@
+     ________ ++     ________
+    /VVVVVVVV\++++  /VVVVVVVV\
+    \VVVVVVVV/++++++\VVVVVVVV/
+     |VVVVVV|++++++++/VVVVV/'
+     |VVVVVV|++++++/VVVVV/'
+    +|VVVVVV|++++/VVVVV/'+
+  +++|VVVVVV|++/VVVVV/'+++++
++++++|VVVVVV|/VVVVV/'+++++++++ Welcome to Vim!
+  +++|VVVVVVVVVVV/'+++++++++
+    +|VVVVVVVVV/'+++++++++
+     |VVVVVVV/'+++++++++
+     |VVVVV/'+++++++++
+     |VVV/'+++++++++
+     'V/'   ++++++
+              ++
+
+Current maps/plugins:
+The <leader> key to start binds is hyphen, -
+Installed plugins: AutoClose, (syn)Markdown, (syn)Mediawiki, SuperTab, NeatStatus, FastFold, Startscreen
+Toggle paste mode with F4.
+
+Binds for insert: ---------------------
+jk - Exit insert mode
+<Tab> - complete word
+CTRL-s - Correct most recent spelling mistake
+<Up> - Enter ONE normal mode action.
+<Down> - Enter an expression, then press <enter> to insert. 
+
+Binds for normal: ----------------------
+F10 - Disable/enable spell check
+leader>hs - Toggle search highlighting
+<leader>sy - Toggle syntax highlighting
+leader>wc - View word count.
+F7 - Open current file in external editor.
+<leader>evf - Edit vimrc file in split
+<leader>svf - Source the vimrc file to update
+s - Preform split change operation.
+
+Arrow keys: (Ctrl)Up-Make new tab/+file browser, (Ctrl)Down-Close current tab/all tabs except current, (Ctrl)Left-Previous/first tab, (Ctrl)Right-Next/last tab
+
+Binds for visual: ----------------------
+s - Sort selection.
+
+User Commands: ------------------
+Scratch - Create a scratch tab, for jotting down disposable text.
+SearchOpen - Search all open files for a pattern.
+Start - Open this file again for reference.
