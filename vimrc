@@ -159,11 +159,13 @@ augroup misc_filetype
 augroup END
 "}}}
 
+" Toggle type of number display between modes {{{
 augroup number_toggle
     autocmd!
     autocmd InsertEnter * :setlocal number norelativenumber
     autocmd InsertLeave * :setlocal relativenumber nonumber
 augroup END
+"}}}
 
 " Settings for editing HTML files {{{
 augroup filetype_html
@@ -176,7 +178,7 @@ augroup filetype_html
     autocmd FileType html :setlocal foldmethod=indent
     autocmd BufWritePre,BufRead *.html :normal! gg=G
     autocmd FileType html :vnoremap <buffer> <leader>c <esc>`>a--><esc>`<i<!--<esc>
-    autocmd FileType html :call MakeTagAbbrevs("i","p","html","div","strong","code")
+    autocmd FileType html :call MakeTagAbbrevs("i","p","html","div","strong","code","h1","h2","h3")
 augroup END
 "}}}
 
@@ -194,7 +196,7 @@ augroup filetype_mediawiki
     " comment text out
     autocmd FileType mediawiki :vnoremap <buffer> <leader>c <esc>`>a--><esc>`<i<!--<esc> 
 
-    " Surround a word in brackets.
+    " Surround some text in brackets.
     autocmd FileType mediawiki :vnoremap <buffer> <leader>[ <esc>`>a]]<esc>`<i[[<esc> 
     autocmd FileType mediawiki :vnoremap <buffer> <leader>{ <esc>`>a}}<esc>`<i{{<esc> 
 
@@ -232,11 +234,15 @@ augroup filetype_markdown
     autocmd FileType markdown :echom "Editing a markdown file:"
     autocmd FileType markdown :echom "[Vis] Press <leader>i to italicize some text."
     autocmd FileType markdown :echom "[Vis] Press <leader>b to bolden some text."
+    autocmd FileType markdown :echom "[Ins] mklink - []()" 
     autocmd FileType markdown :setlocal spell modeline
 
     " Text formatting
     autocmd FileType markdown :vnoremap <buffer> <leader>i <esc>`>a*<esc>`<i*<esc>
     autocmd FileType markdown :vnoremap <buffer> <leader>b <esc>`>a**<esc>`<i**<esc>
+
+    " Abbriviations 
+    autocmd FileType markdown :inoreabbrev <buffer> mklink []()<C-o>F[
 
 augroup END
 "}}}
@@ -290,7 +296,7 @@ if has("gui_running")
     colorscheme wombat
     set mouse=
     set guioptions=mai
-    set guifont=Terminus\ (TTF)\ Medium\ 12,Monospace\ 9
+    set guifont=Terminus\ (TTF)\ Medium\ 13,Monospace\ 9
 endif
 
 "}}}
