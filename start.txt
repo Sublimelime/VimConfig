@@ -16,7 +16,7 @@
 
 Current maps/plugins:
 The <leader> key to start binds is hyphen, -
-Installed plugins: AutoClose, (syn)Markdown, (syn)Mediawiki, SuperTab, NeatStatus, FastFold, Startscreen
+Installed plugins: AutoClose, (syn)Markdown, (syn)Mediawiki, SuperTab, NeatStatus, FastFold, Startscreen, Bullets
 Toggle paste mode with F4.
 
 Binds for insert: ---------------------
@@ -30,8 +30,8 @@ Binds for normal: ----------------------
 F10 - Disable/enable spell check
 leader>hs - Toggle search highlighting
 <leader>sy - Toggle syntax highlighting
-leader>wc - View word count.
-F7 - Open current file in external editor.
+<leader>wc - View word count.
+<leader>b - Open buffer list to choose a buffer to jump to.
 <leader>evf - Edit vimrc file in split
 <leader>svf - Source the vimrc file to update
 s - Preform split change operation.

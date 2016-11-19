@@ -11,7 +11,7 @@ set columns=140 lines=33
 filetype indent plugin on
 set relativenumber nonumber
 syntax on
-set confirm title ruler nohidden lazyredraw noshowmatch autoindent autoread nobackup
+set confirm title ruler hidden lazyredraw noshowmatch autoindent autoread nobackup
 set lbr textwidth=0 showcmd scrolloff=1
 set background=dark
 set timeoutlen=1500 ttimeout ttimeoutlen=1500 timeout 
@@ -25,10 +25,11 @@ set spelllang=en_us nospell encoding=utf-8
 set viminfo='10,<20,s20,/5,:10
 
 " }}}
-" Variables/User commands/functions ------------- {{{
+" Variables/User commands/functions -------------{{{
 
 let mapleader = "-"
 let maplocalleader = "\\"
+let $MYVIMDIR="~/.vim"
 
 " Generate a scratch tab 
 command! Scratch :tabnew | setlocal buftype=nofile bufhidden=hide noswapfile
@@ -58,7 +59,7 @@ endfunction
 " }}}
 
 " Open the start file readonly, for reference.
-command! Start tab sview ~/.vim/start.txt
+command! Start tab sview $MYVIMDIR/start.txt
 
 "}}}
 " Plugin config ------------{{{
@@ -75,7 +76,7 @@ let g:NeatStatusLine_color_filetype = 'guifg=#ffffff guibg=#000000 gui=bold cter
 " Config for startscreen {{{
 function! Start()
     read !echo "Today is" $(date)
-    read ~/.vim/start.txt
+    read $MYVIMDIR/start.txt
     :1
 endfunction
 let g:Startscreen_function = function('Start')
@@ -137,10 +138,14 @@ inoremap <esc> <nop>
 " Sort selected text
 vnoremap s :sort<cr>
 
-" Misc self-explanatory binds
+" Open list of buffers, type number to jump
+nnoremap <leader>b :ls<cr>:buffer<space>
+
+" Misc self-explanatory binds {{{
 nnoremap s <C-w>
 onoremap p i(
 nnoremap Y y$
+"}}}
 
 "}}}
 " Autocommand (groups) ----------------{{{
@@ -282,7 +287,7 @@ cnoreabbrev man help
 " GUI Options -------------------{{{
 
 if has("gui_running")
-    colorscheme torte
+    colorscheme wombat
     set mouse=
     set guioptions=mai
     set guifont=Terminus\ (TTF)\ Medium\ 12,Monospace\ 9
