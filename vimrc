@@ -12,7 +12,7 @@ filetype indent plugin on
 set relativenumber nonumber
 syntax on
 set confirm title ruler hidden lazyredraw noshowmatch autoindent autoread nobackup
-set lbr textwidth=0 showcmd scrolloff=1
+set lbr textwidth=0 showcmd scrolloff=1 switchbuf=usetab 
 set background=dark
 set timeoutlen=1500 ttimeout ttimeoutlen=1500 timeout 
 set pastetoggle=<F4>
@@ -32,7 +32,7 @@ let maplocalleader = "\\"
 let $MYVIMDIR="~/.vim"
 
 " Generate a scratch tab 
-command! Scratch :tabnew | setlocal buftype=nofile bufhidden=hide noswapfile
+command! Scratch :tabnew | setlocal buftype=nofile bufhidden=wipe noswapfile nobuflisted
 
 " Search all open files for a pattern. {{{
 function! s:search_open_files(pattern)
@@ -139,7 +139,7 @@ inoremap <esc> <nop>
 vnoremap s :sort<cr>
 
 " Open list of buffers, type number to jump
-nnoremap <leader>b :ls<cr>:buffer<space>
+nnoremap <leader>b :ls<cr>:sbuffer<space>
 
 " Misc self-explanatory binds {{{
 nnoremap s <C-w>
