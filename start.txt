@@ -24,7 +24,7 @@ jk - Exit insert mode
 <Tab> - complete word
 CTRL-s - Correct most recent spelling mistake
 <Up> - Enter ONE normal mode action.
-<Down> - Enter an expression, then press <enter> to insert. 
+<Down> - Enter an expression, then press <enter> to insert.
 
 Binds for normal: ----------------------
 F10 - Disable/enable spell check

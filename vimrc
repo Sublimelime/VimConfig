@@ -1,7 +1,6 @@
 " Vimrc for config of (g)vim.
 
 " Global Options -------------------{{{
-
 set nocompatible
 
 " Window size
@@ -11,7 +10,8 @@ set columns=140 lines=33
 filetype indent plugin on
 set relativenumber nonumber
 syntax on
-set confirm title ruler hidden lazyredraw noshowmatch autoindent autoread nobackup
+set confirm title ruler hidden lazyredraw noshowmatch autoindent autoread 
+set backup backupdir=~/.vim/backup,. writebackup
 set lbr textwidth=0 showcmd scrolloff=1 switchbuf=usetab cursorline
 set background=dark
 set timeoutlen=1500 ttimeout ttimeoutlen=1500 timeout
@@ -29,7 +29,6 @@ set viminfo='10,<10,s20,/5,:10,h
 
 let mapleader = "-"
 let maplocalleader = "\\"
-let $MYVIMDIR="~/.vim"
 
 " Generate a scratch window
 command! Scratch :new | setlocal buftype=nofile bufhidden=wipe noswapfile nobuflisted
@@ -59,7 +58,7 @@ endfunction
 " }}}
 
 " Open the start file readonly, for reference.
-command! Start tab sview $MYVIMDIR/start.txt
+command! Start tab sview ~/.vim/start.txt
 
 " Remove extra whitespace {{{
 function! s:StripTrailingWhitespaces()
@@ -94,7 +93,7 @@ let g:NeatStatusLine_color_filetype = 'guifg=#ffffff guibg=#000000 gui=bold cter
 " Config for startscreen {{{
 function! Start()
     read !echo "Today is" $(date)
-    read $MYVIMDIR/start.txt
+    read ~/.vim/start.txt
     :1
 endfunction
 let g:Startscreen_function = function('Start')
@@ -174,6 +173,10 @@ augroup misc_filetype
     autocmd FileType vim :setlocal foldmethod=marker
     autocmd FileType conf :setlocal nowrap
     autocmd FileType help :set nospell
+    " CD into the dir of the opened file
+    autocmd BufEnter * execute "cd! ".escape(expand("%:p:h"), ' ')
+    " Jump back to last edited position
+    autocmd BufEnter * :silent! normal! `.
 augroup END
 
 "}}}
