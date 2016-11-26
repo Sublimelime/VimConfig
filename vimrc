@@ -10,8 +10,9 @@ set columns=140 lines=33
 filetype indent plugin on
 set relativenumber nonumber
 syntax on
-set confirm title ruler hidden lazyredraw noshowmatch autoindent autoread 
+set confirm title ruler hidden lazyredraw noshowmatch autoindent autoread foldopen=all sessionoptions-=options
 set backup backupdir=~/.vim/backup,. writebackup
+set swapfile directory=~/.vim/swap,/tmp,.
 set lbr textwidth=0 showcmd scrolloff=1 switchbuf=usetab cursorline
 set background=dark
 set timeoutlen=1500 ttimeout ttimeoutlen=1500 timeout
@@ -23,6 +24,9 @@ set ignorecase smartcase noincsearch
 set wildmenu wildignore=.zip,.gz,.exe,.bin,.odt,.ods
 set spelllang=en_us nospell encoding=utf-8
 set viminfo='10,<10,s20,/5,:10,h
+
+" Setup package manager
+execute pathogen#infect()
 
 " }}}
 " Variables/User commands/functions -------------{{{
