@@ -5,16 +5,16 @@
 set nocompatible
 
 " Window size
-set columns=140 lines=33 
+set columns=140 lines=33
 
 " General options
 filetype indent plugin on
 set relativenumber nonumber
 syntax on
 set confirm title ruler hidden lazyredraw noshowmatch autoindent autoread nobackup
-set lbr textwidth=0 showcmd scrolloff=1 switchbuf=usetab 
+set lbr textwidth=0 showcmd scrolloff=1 switchbuf=usetab cursorline
 set background=dark
-set timeoutlen=1500 ttimeout ttimeoutlen=1500 timeout 
+set timeoutlen=1500 ttimeout ttimeoutlen=1500 timeout
 set pastetoggle=<F4>
 set foldcolumn=1 foldmethod=manual foldlevelstart=0 foldnestmax=7
 set nomodeline modelines=1
@@ -22,7 +22,7 @@ set tabstop=4 shiftwidth=4 expandtab
 set ignorecase smartcase noincsearch
 set wildmenu wildignore=.zip,.gz,.exe,.bin,.odt,.ods
 set spelllang=en_us nospell encoding=utf-8
-set viminfo='10,<20,s20,/5,:10
+set viminfo='10,<10,s20,/5,:10,h
 
 " }}}
 " Variables/User commands/functions -------------{{{
@@ -31,8 +31,8 @@ let mapleader = "-"
 let maplocalleader = "\\"
 let $MYVIMDIR="~/.vim"
 
-" Generate a scratch tab 
-command! Scratch :tabnew | setlocal buftype=nofile bufhidden=wipe noswapfile nobuflisted
+" Generate a scratch window
+command! Scratch :new | setlocal buftype=nofile bufhidden=wipe noswapfile nobuflisted
 
 " Search all open files for a pattern. {{{
 function! s:search_open_files(pattern)
@@ -61,6 +61,24 @@ endfunction
 " Open the start file readonly, for reference.
 command! Start tab sview $MYVIMDIR/start.txt
 
+" Remove extra whitespace {{{
+function! s:StripTrailingWhitespaces()
+    " save last search & cursor position
+    let l:search=@/
+    let l:l = line(".")
+    let l:c = col(".")
+    " Remove whitespace from the ends of lines
+    :silent! %s/\s\+$//e
+    " Trim empty lines from the end of the file
+    :silent! %s#\($\n\s*\)\+\%$##
+    " Return search and cursor pos
+    let @/=l:search
+    call cursor(l:l, l:c)
+    echo "Cleaned whitespace."
+endfunction
+command! STW call s:StripTrailingWhitespaces()
+"}}}
+
 "}}}
 " Plugin config ------------{{{
 
@@ -68,7 +86,7 @@ command! Start tab sview $MYVIMDIR/start.txt
 let g:AutoClosePairs = {'(': ')', '{': '}', '[': ']', '"': '"'}
 
 " Config for Bullets
-let g:bullets_enabled_file_types = ['markdown', 'mediawiki'] 
+let g:bullets_enabled_file_types = ['markdown', 'mediawiki']
 
 " Config for NeatStatus
 let g:NeatStatusLine_color_filetype = 'guifg=#ffffff guibg=#000000 gui=bold ctermfg=15 ctermbg=9 cterm=bold'
@@ -107,7 +125,7 @@ nnoremap <silent> <leader>sy :call ToggleSyntax()<CR>
 " }}}
 
 " Quickly edit/source .vimrc file
-nnoremap <leader>evf :tabedit $MYVIMRC<CR>
+nnoremap <leader>evf :10split $MYVIMRC<CR>
 nnoremap <leader>svf :source $MYVIMRC<CR>
 
 " Change function of arrow keys {{{
@@ -120,7 +138,7 @@ inoremap <Up> <C-o>
 " Bind down to insert an expression into the text, ie <C-r>=
 inoremap <Down> <C-r>=
 
-" Bind arrow keys to change/manipulate tabs in normal mode 
+" Bind arrow keys to change/manipulate tabs in normal mode
 nnoremap <silent> <Left> :tabprevious<cr>
 nnoremap <silent> <Right> :tabnext<cr>
 nnoremap <silent> <C-Right> :tablast<cr>
@@ -150,13 +168,14 @@ nnoremap Y y$
 "}}}
 " Autocommand (groups) ----------------{{{
 
-" Misc filetypes not worth dedicating a group to. {{{
+" Misc filetypes/autocmds not worth dedicating a group to. {{{
 augroup misc_filetype
     autocmd!
     autocmd FileType vim :setlocal foldmethod=marker
-    autocmd FileType config :setlocal nowrap
+    autocmd FileType conf :setlocal nowrap
     autocmd FileType help :set nospell
 augroup END
+
 "}}}
 
 " Toggle type of number display between modes {{{
@@ -189,16 +208,16 @@ augroup filetype_mediawiki
     autocmd FileType mediawiki :echom "Editing a mediawiki file:"
     autocmd FileType mediawiki :echom "[Vis] Press <leader>c to comment out text."
     autocmd FileType mediawiki :echom "[Vis] Press <leader>[ to surround text in double square brackets. [[eg]]"
-    autocmd FileType mediawiki :echom "[Vis] Press <leader>{ to surround text in curly brackets. {{eg}}" 
+    autocmd FileType mediawiki :echom "[Vis] Press <leader>{ to surround text in curly brackets. {{eg}}"
     autocmd FileType mediawiki :echom "[Ins] Press <leader>== to surround a line in equal signs. ==eg=="
     autocmd FileType mediawiki :echom "[Ins] Type tcode to expand to <code></code>, etc."
 
     " comment text out
-    autocmd FileType mediawiki :vnoremap <buffer> <leader>c <esc>`>a--><esc>`<i<!--<esc> 
+    autocmd FileType mediawiki :vnoremap <buffer> <leader>c <esc>`>a--><esc>`<i<!--<esc>
 
     " Surround some text in brackets.
-    autocmd FileType mediawiki :vnoremap <buffer> <leader>[ <esc>`>a]]<esc>`<i[[<esc> 
-    autocmd FileType mediawiki :vnoremap <buffer> <leader>{ <esc>`>a}}<esc>`<i{{<esc> 
+    autocmd FileType mediawiki :vnoremap <buffer> <leader>[ <esc>`>a]]<esc>`<i[[<esc>
+    autocmd FileType mediawiki :vnoremap <buffer> <leader>{ <esc>`>a}}<esc>`<i{{<esc>
 
     " Surround a line in equal signs
     autocmd FileType mediawiki :inoremap <buffer> <leader>== <esc>I==<esc>A==<esc>o
@@ -234,14 +253,14 @@ augroup filetype_markdown
     autocmd FileType markdown :echom "Editing a markdown file:"
     autocmd FileType markdown :echom "[Vis] Press <leader>i to italicize some text."
     autocmd FileType markdown :echom "[Vis] Press <leader>b to bolden some text."
-    autocmd FileType markdown :echom "[Ins] mklink - []()" 
+    autocmd FileType markdown :echom "[Ins] mklink - []()"
     autocmd FileType markdown :setlocal spell modeline
 
     " Text formatting
     autocmd FileType markdown :vnoremap <buffer> <leader>i <esc>`>a*<esc>`<i*<esc>
     autocmd FileType markdown :vnoremap <buffer> <leader>b <esc>`>a**<esc>`<i**<esc>
 
-    " Abbriviations 
+    " Abbriviations
     autocmd FileType markdown :inoreabbrev <buffer> mklink []()<C-o>F[
 
 augroup END
@@ -293,7 +312,7 @@ cnoreabbrev man help
 " GUI Options -------------------{{{
 
 if has("gui_running")
-    colorscheme wombat
+    colorscheme void
     set mouse=
     set guioptions=mai
     set guifont=Terminus\ (TTF)\ Medium\ 13,Monospace\ 9

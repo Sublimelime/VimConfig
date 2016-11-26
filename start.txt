@@ -42,6 +42,7 @@ Binds for visual: ----------------------
 s - Sort selection.
 
 User Commands: ------------------
-Scratch - Create a scratch tab, for jotting down disposable text.
+Scratch - Create a scratch window, for jotting down disposable text.
 SearchOpen - Search all open files for a pattern.
 Start - Open this file again for reference.
+STW - Remove extra whitespace at ends of lines and file.
