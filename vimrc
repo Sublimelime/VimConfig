@@ -10,7 +10,7 @@ set columns=140 lines=33
 filetype indent plugin on
 set relativenumber nonumber
 syntax on
-set confirm title ruler hidden lazyredraw noshowmatch autoindent autoread foldopen=all 
+set confirm title ruler hidden lazyredraw noshowmatch autoindent autoread
 set backup backupdir=~/.vim/backup,. writebackup
 set swapfile directory=~/.vim/swap,/tmp,.
 set lbr textwidth=0 showcmd scrolloff=1 switchbuf=usetab cursorline
@@ -173,11 +173,12 @@ augroup misc_filetype
     autocmd!
     autocmd FileType vim :setlocal foldmethod=marker
     autocmd FileType conf :setlocal nowrap
+    autocmd FileType gitcommit :setlocal nobackup noswapfile
     autocmd FileType help :set nospell
     " CD into the dir of the opened file
     autocmd BufEnter * execute "cd! ".escape(expand("%:p:h"), ' ')
-    " Jump back to last edited position
-    autocmd BufEnter * :silent! normal! `.
+    " Jump back to the last edited position
+    autocmd BufRead * :silent! normal! `.
 augroup END
 
 "}}}
@@ -187,6 +188,8 @@ augroup number_toggle
     autocmd!
     autocmd InsertEnter * :setlocal number norelativenumber
     autocmd InsertLeave * :setlocal relativenumber nonumber
+    autocmd WinLeave * :setlocal number norelativenumber
+    autocmd WinEnter * :setlocal relativenumber nonumber
 augroup END
 "}}}
 
