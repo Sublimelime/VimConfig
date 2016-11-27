@@ -13,7 +13,7 @@ syntax on
 set noconfirm title ruler hidden lazyredraw noshowmatch autoindent autoread
 set backup backupdir=~/.vim/backup,. writebackup
 set swapfile directory=~/.vim/swap,/tmp,.
-set lbr textwidth=0 showcmd scrolloff=1 switchbuf=usetab cursorline
+set lbr textwidth=0 showcmd scrolloff=1 switchbuf=useopen,usetab cursorline
 set background=dark
 set timeoutlen=1500 ttimeout ttimeoutlen=1500 timeout
 set pastetoggle=<F4>
@@ -79,6 +79,23 @@ endfunction
 command! STW call s:StripTrailingWhitespaces()
 "}}}
 
+" Jump to a named buffer {{{
+function! s:Buffer(arg)
+   let buflist = []
+   for i in range(tabpagenr('$'))
+       call extend(buflist, tabpagebuflist(i + 1))
+   endfor
+   if count(buflist, bufnr(a:arg)) > 0
+       execute "sbuffer " . a:arg
+   else
+       execute "buffer " . a:arg
+   endif
+endfunction
+command! -nargs=1 -complete=buffer BufferJump call <sid>Buffer(<f-args>)
+nnoremap <leader>b :ls<cr>:BufferJump<space>
+
+"}}}
+
 "}}}
 " Plugin config ------------{{{
 
@@ -99,9 +116,6 @@ function! Start()
 endfunction
 let g:Startscreen_function = function('Start')
 " }}}
-
-" Map for buffet
-nnoremap <leader>b :Bufferlist<cr>
 
 "}}}
 " Keybinds ------------------{{{
@@ -245,6 +259,8 @@ augroup filetype_text
     autocmd!
     autocmd FileType text :echom "Editing a text file:"
     autocmd FileType text setlocal spell modeline
+    autocmd FileType text nnoremap <buffer> k gk
+    autocmd FileType text nnoremap <buffer> j gj
 augroup END
 "}}}
 
