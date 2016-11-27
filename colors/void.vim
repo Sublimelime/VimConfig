@@ -1,5 +1,5 @@
-" Maintainer: Gangsir	
-" Last Change: Nov 20 2016	
+" Maintainer: Gangsir
+" Last Change: Nov 27 2016
 
 set background=dark
 
@@ -23,12 +23,12 @@ endif
 
 
 " General colors
-hi Cursor 		guifg=NONE    guibg=#656565 gui=none 
+hi Cursor 		guifg=NONE    guibg=#656565 gui=none
 hi Normal 		guifg=#f6f3e8 guibg=#242424 gui=none
 hi NonText 		guifg=#808080 guibg=#303030 gui=none
-hi LineNr 		guifg=#444498 guibg=#000000 gui=none
-hi StatusLine 	guifg=#ffffff guibg=#444498 gui=none
-hi StatusLineNC guifg=#857b6f guibg=#444444 gui=none
+hi LineNr 		guifg=#444498 guibg=#000000 gui=none ctermbg=Black ctermfg=DarkMagenta
+hi StatusLine 	guifg=#ffffff guibg=#444498 gui=none ctermbg=White ctermfg=DarkMagenta
+hi StatusLineNC guifg=#857b6f guibg=#444444 gui=none ctermbg=White ctermfg=DarkGrey
 hi VertSplit 	guifg=#444444 guibg=#444444 gui=none
 hi Folded 		guibg=#384048 guifg=#a0a8b0 gui=none
 hi Title		guifg=#f6f3e8 guibg=NONE	gui=bold
@@ -48,5 +48,3 @@ hi Keyword		guifg=#8ac6f2 gui=none
 hi PreProc 		guifg=#e5786d gui=none
 hi Number		guifg=#009cff gui=none
 hi Special		guifg=#e7f6da gui=none
-
-
