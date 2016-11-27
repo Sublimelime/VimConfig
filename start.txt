@@ -16,7 +16,9 @@
 
 Current maps/plugins:
 The <leader> key to start binds is hyphen, -
-Installed plugins: AutoClose, (syn)Markdown, (syn)Mediawiki, SuperTab, NeatStatus, FastFold, Startscreen, Bullets
+Installed plugins: AutoClose, (syn)Markdown, (syn)Mediawiki, SuperTab, NeatStatus, FastFold, Startscreen, Bullets,
+Buffet
+
 Toggle paste mode with F4.
 
 Binds for insert: ---------------------
@@ -35,8 +37,7 @@ leader>hs - Toggle search highlighting
 <leader>evf - Edit vimrc file in split
 <leader>svf - Source the vimrc file to update
 s - Preform split change operation.
-
-Arrow keys: (Ctrl)Up-Make new tab/+file browser, (Ctrl)Down-Close current tab/all tabs except current, (Ctrl)Left-Previous/first tab, (Ctrl)Right-Next/last tab
+Down arrow key - Close current window. Fails if last window, and modified.
 
 Binds for visual: ----------------------
 s - Sort selection.

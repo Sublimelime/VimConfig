@@ -10,7 +10,7 @@ set columns=140 lines=33
 filetype indent plugin on
 set relativenumber nonumber
 syntax on
-set confirm title ruler hidden lazyredraw noshowmatch autoindent autoread
+set noconfirm title ruler hidden lazyredraw noshowmatch autoindent autoread
 set backup backupdir=~/.vim/backup,. writebackup
 set swapfile directory=~/.vim/swap,/tmp,.
 set lbr textwidth=0 showcmd scrolloff=1 switchbuf=usetab cursorline
@@ -100,6 +100,9 @@ endfunction
 let g:Startscreen_function = function('Start')
 " }}}
 
+" Map for buffet
+nnoremap <leader>b :Bufferlist<cr>
+
 "}}}
 " Keybinds ------------------{{{
 
@@ -125,7 +128,7 @@ nnoremap <silent> <leader>sy :call ToggleSyntax()<CR>
 " }}}
 
 " Quickly edit/source .vimrc file
-nnoremap <leader>evf :10split $MYVIMRC<CR>
+nnoremap <leader>evf :15split $MYVIMRC<CR>
 nnoremap <leader>svf :source $MYVIMRC<CR>
 
 " Change function of arrow keys {{{
@@ -138,15 +141,9 @@ inoremap <Up> <C-o>
 " Bind down to insert an expression into the text, ie <C-r>=
 inoremap <Down> <C-r>=
 
-" Bind arrow keys to change/manipulate tabs in normal mode
-nnoremap <silent> <Left> :tabprevious<cr>
-nnoremap <silent> <Right> :tabnext<cr>
-nnoremap <silent> <C-Right> :tablast<cr>
-nnoremap <silent> <C-Left> :tabfirst<cr>
-nnoremap <C-Up> :Texplore<cr>
-nnoremap <Up> :tabnew<cr>
-nnoremap <silent> <Down> :tabclose<cr>
-nnoremap <silent> <C-Down> :tabonly<cr>
+" Bind down in normal mode to close the current window
+nnoremap <Down> :q<cr>
+
 "}}}
 
 " Make getting into normal mode easier
@@ -156,8 +153,6 @@ inoremap <esc> <nop>
 " Sort selected text
 vnoremap s :sort<cr>
 
-" Open list of buffers, type number to jump
-nnoremap <leader>b :ls<cr>:sbuffer<space>
 
 " Misc self-explanatory binds {{{
 nnoremap s <C-w>
