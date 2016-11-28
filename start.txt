@@ -37,6 +37,7 @@ leader>hs - Toggle search highlighting
 <leader>svf - Source the vimrc file to update
 s - Preform split change operation.
 Down arrow key - Close current window. Fails if last window, and modified.
+Left/Right arrow keys - Switch tab
 
 Binds for visual: ----------------------
 s - Sort selection.

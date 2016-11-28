@@ -2,3 +2,4 @@
 .VimballRecord
 backup/*
 swap/*
+sessions/*

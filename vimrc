@@ -14,6 +14,7 @@ set noconfirm title ruler hidden lazyredraw noshowmatch autoindent autoread
 set backup backupdir=~/.vim/backup,. writebackup
 set swapfile directory=~/.vim/swap,/tmp,.
 set lbr textwidth=0 showcmd scrolloff=1 switchbuf=useopen,usetab cursorline
+set sessionoptions=curdir,tabpages,folds,buffers,help
 set background=dark
 set timeoutlen=1500 ttimeout ttimeoutlen=1500 timeout
 set pastetoggle=<F4>
@@ -157,6 +158,10 @@ inoremap <Down> <C-r>=
 
 " Bind down in normal mode to close the current window
 nnoremap <Down> :q<cr>
+
+"Bind left and right to switch between tabs
+nnoremap <Left> :tabprevious<cr>
+nnoremap <Right> :tabnext<cr>
 
 "}}}
 
