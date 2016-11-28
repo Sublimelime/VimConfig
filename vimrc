@@ -85,17 +85,17 @@ endfunction
 command! STW call s:StripTrailingWhitespaces()
 "}}}
 
-" Jump to a named buffer {{{
+" Jump to a buffer {{{
 function! s:Buffer(arg)
-   let buflist = []
-   for i in range(tabpagenr('$'))
-       call extend(buflist, tabpagebuflist(i + 1))
-   endfor
-   if count(buflist, bufnr(a:arg)) > 0
-       execute "sbuffer " . a:arg
-   else
-       execute "buffer " . a:arg
-   endif
+    let buflist = []
+    for i in range(tabpagenr('$'))
+        call extend(buflist, tabpagebuflist(i + 1))
+    endfor
+    if count(buflist, bufexists(str2nr(a:arg)) ? str2nr(a:arg) : bufnr(a:arg)) > 0
+        execute "sbuffer " . a:arg
+    else
+        execute "buffer " . a:arg
+    endif
 endfunction
 command! -nargs=1 -complete=buffer BufferJump call <sid>Buffer(<f-args>)
 nnoremap <leader>b :ls<cr>:BufferJump<space>
