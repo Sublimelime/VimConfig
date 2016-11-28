@@ -3,6 +3,11 @@
 " Global Options -------------------{{{
 set nocompatible
 
+" Create missing directories, if any
+silent !mkdir ~/.vim/swap
+silent !mkdir ~/.vim/sessions
+silent !mkdir ~/.vim/backup
+
 " Window size
 set columns=140 lines=33
 
