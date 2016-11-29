@@ -1,6 +1,6 @@
 " Vimrc for config of (g)vim.
 
-" Global Options -------------------{{{
+" Global Options -------------------{{{1
 set nocompatible
 
 " Create missing directories, if any
@@ -8,19 +8,15 @@ silent !mkdir ~/.vim/swap
 silent !mkdir ~/.vim/sessions
 silent !mkdir ~/.vim/backup
 
-" Window size
-set columns=140 lines=33
-
 " General options
 filetype indent plugin on
 set relativenumber nonumber
 syntax on
-set noconfirm title ruler hidden lazyredraw noshowmatch autoindent autoread
+set noconfirm title ruler hidden lazyredraw noshowmatch autoindent autoread concealcursor=n
 set backup backupdir=~/.vim/backup,. writebackup
 set swapfile directory=~/.vim/swap,/tmp,.
 set lbr textwidth=0 showcmd scrolloff=1 switchbuf=useopen,usetab cursorline
 set sessionoptions=curdir,tabpages,folds,buffers,help
-set background=dark
 set timeoutlen=1500 ttimeout ttimeoutlen=1500 timeout
 set pastetoggle=<F4>
 set foldcolumn=1 foldmethod=manual foldlevelstart=0 foldnestmax=7
@@ -31,8 +27,7 @@ set wildmenu wildignore=.zip,.gz,.exe,.bin,.odt,.ods
 set spelllang=en_us nospell encoding=utf-8
 set viminfo='10,<10,s20,/5,:10,h
 
-" }}}
-" Variables/User commands/functions -------------{{{
+" Variables/User commands/functions -------------{{{1
 
 let mapleader = "-"
 let maplocalleader = "\\"
@@ -85,25 +80,7 @@ endfunction
 command! STW call s:StripTrailingWhitespaces()
 "}}}
 
-" Jump to a buffer {{{
-function! s:Buffer(arg)
-    let buflist = []
-    for i in range(tabpagenr('$'))
-        call extend(buflist, tabpagebuflist(i + 1))
-    endfor
-    if count(buflist, bufexists(str2nr(a:arg)) ? str2nr(a:arg) : bufnr(a:arg)) > 0
-        execute "sbuffer " . a:arg
-    else
-        execute "buffer " . a:arg
-    endif
-endfunction
-command! -nargs=1 -complete=buffer BufferJump call <sid>Buffer(<f-args>)
-nnoremap <leader>b :ls<cr>:BufferJump<space>
-
-"}}}
-
-"}}}
-" Plugin config ------------{{{
+" Plugin config ------------{{{1
 
 " Config for autoclose
 let g:AutoClosePairs = {'(': ')', '{': '}', '[': ']', '"': '"'}
@@ -123,8 +100,13 @@ endfunction
 let g:Startscreen_function = function('Start')
 " }}}
 
-"}}}
-" Keybinds ------------------{{{
+" Config for BufExplorer {{{
+let g:bufExplorerDisableDefaultKeyMapping=1
+let g:bufExplorerShowNoName=1
+nnoremap <leader>b :BufExplorer<cr>
+" }}}
+
+" Keybinds ------------------{{{1
 
 " Commands to toggle spell checking, fix most recent error
 nnoremap <F10> <Esc>:setlocal spell!<cr>
@@ -184,8 +166,7 @@ onoremap p i(
 nnoremap Y y$
 "}}}
 
-"}}}
-" Autocommand (groups) ----------------{{{
+" Autocommand (groups) ----------------{{{1
 
 " Misc filetypes/autocmds not worth dedicating a group to. {{{
 augroup misc_filetype
@@ -282,7 +263,7 @@ augroup filetype_markdown
     autocmd FileType markdown :echom "[Vis] Press <leader>i to italicize some text."
     autocmd FileType markdown :echom "[Vis] Press <leader>b to bolden some text."
     autocmd FileType markdown :echom "[Ins] mklink - []()"
-    autocmd FileType markdown :setlocal spell modeline
+    autocmd FileType markdown :setlocal spell modeline conceallevel=1
 
     " Text formatting
     autocmd FileType markdown :vnoremap <buffer> <leader>i <esc>`>a*<esc>`<i*<esc>
@@ -294,8 +275,7 @@ augroup filetype_markdown
 augroup END
 "}}}
 
-"}}}
-" Abbriviations ---------------{{{
+" Abbriviations ---------------{{{1
 
 " Insert mode
 inoreabbrev i I
@@ -332,18 +312,23 @@ inoreabbrev didnt didn't
 inoreabbrev thats that's
 inoreabbrev goverment government
 inoreabbrev theyre they're
+inoreabbrev isnt isn't
 
 " Command line
 cnoreabbrev man help
 
-"}}}
-" GUI Options -------------------{{{
+" Graphical Options -------------------{{{1
+
+set columns=140 lines=33
 
 if has("gui_running")
-    colorscheme void
+    set background=light
+    colorscheme lucius
+    :LuciusLightLowContrast
     set mouse=
     set guioptions=mai
     set guifont=Terminus\ (TTF)\ Medium\ 13,Monospace\ 9
+else
+    set background=dark
+    colorscheme default
 endif
-
-"}}}
