@@ -7,17 +7,19 @@ set nocompatible
 silent !mkdir ~/.vim/swap
 silent !mkdir ~/.vim/sessions
 silent !mkdir ~/.vim/backup
+silent !mkdir ~/.vim/backup/undo
 
 " General options
 filetype indent plugin on
 set relativenumber nonumber
 syntax on
 set noconfirm title ruler hidden lazyredraw noshowmatch autoindent autoread concealcursor=n
-set backup backupdir=~/.vim/backup,. writebackup
+set backup writebackup backupdir=~/.vim/backup,. 
+set undofile undodir=~/.vim/backup/undo,.
 set swapfile directory=~/.vim/swap,/tmp,.
 set lbr textwidth=0 showcmd scrolloff=1 switchbuf=useopen,usetab cursorline
 set sessionoptions=curdir,tabpages,folds,buffers,help
-set timeoutlen=1500 ttimeout ttimeoutlen=1500 timeout
+set timeoutlen=1500 ttimeout ttimeoutlen=1500 timeout updatetime=10000
 set pastetoggle=<F4>
 set foldcolumn=1 foldmethod=manual foldlevelstart=0 foldnestmax=7
 set nomodeline modelines=1
