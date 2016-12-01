@@ -264,7 +264,7 @@ augroup filetype_markdown
     autocmd FileType markdown :echom "[Vis] Press <leader>i to italicize some text."
     autocmd FileType markdown :echom "[Vis] Press <leader>b to bolden some text."
     autocmd FileType markdown :echom "[Ins] mklink - []()"
-    autocmd FileType markdown :setlocal spell modeline conceallevel=1 
+    autocmd FileType markdown :setlocal spell modeline conceallevel=1
 
     " Text formatting
     autocmd FileType markdown :vnoremap <buffer> <leader>i <esc>`>a*<esc>`<i*<esc>

@@ -19,6 +19,7 @@ The <leader> key to start binds is hyphen, -
 Installed plugins: AutoClose, SuperTab, NeatStatus, FastFold, Startscreen, Bullets, BufExplorer
 Installed syntax: Markdown, Mediawiki
 Installed folding support: Markdown, Mediawiki
+Installed filetypePlugins: {HTML,xml}MatchTag
 
 Toggle paste mode with F4.
 
