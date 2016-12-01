@@ -16,7 +16,9 @@
 
 Current maps/plugins:
 The <leader> key to start binds is hyphen, -
-Installed plugins: AutoClose, (syn)Markdown, (syn)Mediawiki, SuperTab, NeatStatus, FastFold, Startscreen, Bullets, BufExplorer
+Installed plugins: AutoClose, SuperTab, NeatStatus, FastFold, Startscreen, Bullets, BufExplorer
+Installed syntax: Markdown, Mediawiki
+Installed folding support: Markdown, Mediawiki
 
 Toggle paste mode with F4.
 
@@ -46,4 +48,4 @@ User Commands: ------------------
 Scratch - Create a scratch window, for jotting down disposable text.
 SearchOpen - Search all open files for a pattern.
 Start - Open this file again for reference.
-STW - Remove extra whitespace at ends of lines and file.
+StripWhitespace - Remove extra whitespace at ends of lines and file.

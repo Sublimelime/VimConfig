@@ -14,7 +14,7 @@ filetype indent plugin on
 set relativenumber nonumber
 syntax on
 set noconfirm title ruler hidden lazyredraw noshowmatch autoindent autoread concealcursor=n
-set backup writebackup backupdir=~/.vim/backup,. 
+set backup writebackup backupdir=~/.vim/backup,.
 set undofile undodir=~/.vim/backup/undo,.
 set swapfile directory=~/.vim/swap,/tmp,.
 set lbr textwidth=0 showcmd scrolloff=1 switchbuf=useopen,usetab cursorline
@@ -65,7 +65,7 @@ endfunction
 command! Start tab sview ~/.vim/start.txt
 
 " Remove extra whitespace {{{
-function! s:StripTrailingWhitespaces()
+function! s:StripWhitespace()
     " save last search & cursor position
     let l:search=@/
     let l:l = line(".")
@@ -74,12 +74,13 @@ function! s:StripTrailingWhitespaces()
     :silent! %s/\s\+$//e
     " Trim empty lines from the end of the file
     :silent! %s#\($\n\s*\)\+\%$##
+
     " Return search and cursor pos
     let @/=l:search
     call cursor(l:l, l:c)
     echo "Cleaned whitespace."
 endfunction
-command! STW call s:StripTrailingWhitespaces()
+command! StripWhitespace call <sid>StripWhitespace()
 "}}}
 
 " Plugin config ------------{{{1
@@ -235,10 +236,6 @@ augroup filetype_mediawiki
 
     autocmd FileType mediawiki setlocal spell textwidth=120
 
-    " Enable folding based on ==sections==
-    autocmd FileType mediawiki setlocal foldexpr=getline(v:lnum)=~'^\\(=\\+\\)[^=]\\+\\1\\(\\s*<!--.*-->\\)\\=\\s*$'?\">\".(len(matchstr(getline(v:lnum),'^=\\+'))-1):\"=\"
-    autocmd FileType mediawiki setlocal foldmethod=expr
-
     " Setup Snippets
     autocmd FileType mediawiki :inoreabbrev <buffer> wtable {\|<space>class="wikitable"<cr>\|-<cr>!Option1!!Option2!!Option3<cr>}
     autocmd FileType mediawiki :inoreabbrev <buffer> cate [[Category:]]<left><left>
@@ -267,7 +264,7 @@ augroup filetype_markdown
     autocmd FileType markdown :echom "[Vis] Press <leader>i to italicize some text."
     autocmd FileType markdown :echom "[Vis] Press <leader>b to bolden some text."
     autocmd FileType markdown :echom "[Ins] mklink - []()"
-    autocmd FileType markdown :setlocal spell modeline conceallevel=1
+    autocmd FileType markdown :setlocal spell modeline conceallevel=1 
 
     " Text formatting
     autocmd FileType markdown :vnoremap <buffer> <leader>i <esc>`>a*<esc>`<i*<esc>
