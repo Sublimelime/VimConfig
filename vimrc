@@ -19,7 +19,7 @@ set undofile undodir=~/.vim/backup/undo,.
 set swapfile directory=~/.vim/swap,/tmp,.
 set lbr textwidth=0 showcmd scrolloff=1 switchbuf=useopen,usetab cursorline
 set sessionoptions=curdir,tabpages,folds,buffers,help
-set timeoutlen=1500 ttimeout ttimeoutlen=1500 timeout updatetime=10000
+set timeoutlen=1500 ttimeout ttimeoutlen=1500 timeout updatetime=5000
 set pastetoggle=<F4>
 set foldcolumn=1 foldmethod=manual foldlevelstart=0 foldnestmax=7
 set nomodeline modelines=1
@@ -171,7 +171,7 @@ nnoremap Y y$
 " Autocommand (groups) ----------------{{{1
 
 " Misc filetypes/autocmds not worth dedicating a group to. {{{
-augroup misc_filetype
+augroup misc
     autocmd!
     autocmd FileType vim :setlocal foldmethod=marker
     autocmd FileType conf :setlocal nowrap
@@ -181,6 +181,8 @@ augroup misc_filetype
     autocmd BufEnter * execute "cd! ".escape(expand("%:p:h"), ' ')
     " Jump back to the last edited position
     autocmd BufRead * :silent! normal! `.
+    " Exit insert mode automatically after inactivity
+    autocmd CursorHoldI * :stopinsert
 augroup END
 
 "}}}
@@ -321,7 +323,7 @@ cnoreabbrev man help
 
 " Graphical Options -------------------{{{1
 
-set columns=140 lines=33
+set columns=135 lines=33
 
 if has("gui_running")
     set background=light
