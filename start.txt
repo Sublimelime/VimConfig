@@ -38,12 +38,15 @@ leader>hs - Toggle search highlighting
 <leader>b - Open buffer list to choose a buffer to jump to. 
 <leader>evf - Edit vimrc file in split
 <leader>svf - Source the vimrc file to update
+<leader>J - Join line below
 s - Preform split change operation.
 Down arrow key - Close current window. Fails if last window, and modified.
 Left/Right arrow keys - Switch tab
+HJKL - Rebound to do 'extreme' motions. Eg H=Move to start of line, J=Bottom of file, etc
 
 Binds for visual: ----------------------
 s - Sort selection.
+<Up, Down> - Move text up and down. 
 
 User Commands: ------------------
 Scratch - Create a scratch window, for jotting down disposable text.

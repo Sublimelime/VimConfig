@@ -19,12 +19,12 @@ set undofile undodir=~/.vim/backup/undo,.
 set swapfile directory=~/.vim/swap,/tmp,.
 set lbr textwidth=0 showcmd scrolloff=1 switchbuf=useopen,usetab cursorline
 set sessionoptions=curdir,tabpages,folds,buffers,help
-set timeoutlen=1500 ttimeout ttimeoutlen=1500 timeout updatetime=5000
+set timeoutlen=1500 ttimeout ttimeoutlen=1500 timeout updatetime=7000
 set pastetoggle=<F4>
 set foldcolumn=1 foldmethod=manual foldlevelstart=0 foldnestmax=7
 set nomodeline modelines=1
 set tabstop=4 shiftwidth=4 expandtab
-set ignorecase smartcase noincsearch
+set ignorecase smartcase noincsearch nowrapscan
 set wildmenu wildignore=.zip,.gz,.exe,.bin,.odt,.ods
 set spelllang=en_us nospell encoding=utf-8
 set viminfo='10,<10,s20,/5,:10,h
@@ -83,6 +83,9 @@ endfunction
 command! StripWhitespace call <sid>StripWhitespace()
 "}}}
 
+" View the difference between the current buffer and it's file on disk.
+command! DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis | wincmd p | diffthis
+
 " Plugin config ------------{{{1
 
 " Config for autoclose
@@ -111,9 +114,9 @@ nnoremap <leader>b :BufExplorer<cr>
 
 " Keybinds ------------------{{{1
 
-" Commands to toggle spell checking, fix most recent error
+" Normal mode {{{2
+" Command to toggle spell checking
 nnoremap <F10> <Esc>:setlocal spell!<cr>
-inoremap <C-s> <esc>[sz=
 
 " Toggling search word highlighting, toggle with shift-h
 nnoremap <silent> <leader>hs :setlocal hls!<cr>
@@ -121,7 +124,7 @@ nnoremap <silent> <leader>hs :setlocal hls!<cr>
 " View word count
 nnoremap <leader>wc g<C-g>
 
-" Toggle syntax highlighting {{{
+" Toggle syntax highlighting
 function! ToggleSyntax()
     if exists("g:syntax_on")
         syntax off
@@ -130,12 +133,28 @@ function! ToggleSyntax()
     endif
 endfunction
 nnoremap <silent> <leader>sy :call ToggleSyntax()<CR>
-" }}}
 
 " Quickly edit/source .vimrc file
 nnoremap <leader>evf :15split $MYVIMRC<CR>
 nnoremap <leader>svf :source $MYVIMRC<CR>
 
+
+" Insert mode {{{2
+" Jump back and fix most recent error
+inoremap <C-s> <esc>[sz=
+
+" Make getting into normal mode easier
+inoremap jk <esc>l
+inoremap <esc> <nop>
+
+" Visual mode {{{2
+" Sort selected text
+nnoremap s :sort<cr>
+
+" Move highlighted text up and down in visual mode
+vnoremap <Down> :m '>+1<CR>gv=gv
+vnoremap <Up> :m '<-2<CR>gv=gv
+"}}}2
 " Change function of arrow keys {{{
 inoremap <Left> <nop>
 inoremap <Right> <nop>
@@ -154,19 +173,16 @@ nnoremap <Left> :tabprevious<cr>
 nnoremap <Right> :tabnext<cr>
 
 "}}}
-
-" Make getting into normal mode easier
-inoremap jk <esc>l
-inoremap <esc> <nop>
-
-" Sort selected text
-vnoremap s :sort<cr>
-
-
 " Misc self-explanatory binds {{{
 nnoremap s <C-w>
 onoremap p i(
 nnoremap Y y$
+" Rebind uppercase versions of hjkl to do 'extreme' movements
+nnoremap H ^
+nnoremap L $
+nnoremap J G
+nnoremap <leader>J J
+nnoremap K gg
 "}}}
 
 " Autocommand (groups) ----------------{{{1
