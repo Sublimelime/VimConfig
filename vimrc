@@ -257,7 +257,9 @@ augroup filetype_mediawiki
     autocmd FileType mediawiki setlocal spell textwidth=120
 
     " Setup Snippets
-    autocmd FileType mediawiki :inoreabbrev <buffer> wtable {\|<space>class="wikitable"<cr>\|-<cr>!Option1!!Option2!!Option3<cr>}
+    autocmd FileType mediawiki :inoreabbrev <buffer> wtable 
+                \{\|<space>class="wikitable"<cr>\|-<cr>!Option1!!Option2!!Option3<cr>\|-<cr>\|Value1\|\|Value2\|\|Value3<cr>\|-<cr>\|}
+
     autocmd FileType mediawiki :inoreabbrev <buffer> cate [[Category:]]<left><left>
     autocmd FileType mediawiki :inoreabbrev br <br>
     autocmd FileType mediawiki :inoreabbrev sig --~~~~
@@ -331,6 +333,7 @@ inoreabbrev thats that's
 inoreabbrev goverment government
 inoreabbrev theyre they're
 inoreabbrev isnt isn't
+inoreabbrev paralell parallel
 
 " Command line
 cnoreabbrev man help
