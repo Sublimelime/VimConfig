@@ -3,13 +3,18 @@
 " Global Options -------------------{{{1
 set nocompatible
 
-" Create missing directories, if any
-silent !mkdir ~/.vim/swap
-silent !mkdir ~/.vim/sessions
-silent !mkdir ~/.vim/backup
-silent !mkdir ~/.vim/backup/undo
+" Create missing directories, if any {{{2
+if !isdirectory($HOME.'/.vim/backup/undo')
+    silent call mkdir($HOME.'/.vim/backup/undo', 'p')
+endif
+if !isdirectory($HOME.'/.vim/swap')
+    silent call mkdir($HOME.'/.vim/swap','p')
+endif
+if !isdirectory($HOME.'/.vim/sessions')
+    silent call mkdir($HOME.'/.vim/sessions', 'p')
+endif
 
-" General options
+" General options {{{2
 filetype indent plugin on
 set relativenumber nonumber
 syntax on
@@ -94,8 +99,13 @@ let g:AutoClosePairs = {'(': ')', '{': '}', '[': ']', '"': '"'}
 " Config for Bullets
 let g:bullets_enabled_file_types = ['markdown', 'mediawiki']
 
-" Config for NeatStatus
-let g:NeatStatusLine_color_filetype = 'guifg=#ffffff guibg=#000000 gui=bold ctermfg=15 ctermbg=9 cterm=bold'
+" Config for NeatStatus {{{
+if !has("gui_running") && &t_Co == 256
+    let g:NeatStatusLine_color_filetype = 'guifg=#ffffff guibg=#000000 gui=bold ctermfg=White ctermbg=Black cterm=bold'
+else
+    let g:NeatStatusLine_color_filetype = 'guifg=#ffffff guibg=#000000 gui=bold ctermfg=15 ctermbg=9 cterm=bold'
+endif
+"}}}
 
 " Config for startscreen {{{
 function! Start()
@@ -177,17 +187,14 @@ nnoremap <Right> :tabnext<cr>
 nnoremap s <C-w>
 onoremap p i(
 nnoremap Y y$
-" Rebind uppercase versions of hjkl to do 'extreme' movements
+" Rebind uppercase versions of h,l to do 'extreme' movements
 nnoremap H ^
 nnoremap L $
-nnoremap J G
-nnoremap <leader>J J
-nnoremap K gg
 "}}}
 
 " Autocommand (groups) ----------------{{{1
 
-" Misc filetypes/autocmds not worth dedicating a group to. {{{
+" Misc filetypes/autocmds not worth dedicating a group to. {{{2
 augroup misc
     autocmd!
     autocmd FileType vim :setlocal foldmethod=marker
@@ -202,9 +209,8 @@ augroup misc
     autocmd CursorHoldI * :stopinsert
 augroup END
 
-"}}}
 
-" Toggle type of number display between modes {{{
+" Toggle type of number display between modes {{{2
 augroup number_toggle
     autocmd!
     autocmd InsertEnter * :setlocal number norelativenumber
@@ -212,9 +218,8 @@ augroup number_toggle
     autocmd WinLeave * :setlocal number norelativenumber
     autocmd WinEnter * :setlocal relativenumber nonumber
 augroup END
-"}}}
 
-" Settings for editing HTML files {{{
+" Settings for editing HTML files {{{2
 augroup filetype_html
     autocmd!
     autocmd FileType html :echom "Editing a HTML file:"
@@ -227,9 +232,8 @@ augroup filetype_html
     autocmd FileType html :vnoremap <buffer> <leader>c <esc>`>a--><esc>`<i<!--<esc>
     autocmd FileType html :call MakeTagAbbrevs("i","p","html","div","strong","code","h1","h2","h3")
 augroup END
-"}}}
 
-" Settings for editing mediawiki files {{{
+" Settings for editing mediawiki files {{{2
 augroup filetype_mediawiki
     autocmd!
 
@@ -260,9 +264,8 @@ augroup filetype_mediawiki
     autocmd FileType mediawiki :call MakeTagAbbrevs("nowiki","pre","code","strong","includeonly","noinclude")
 
 augroup END
-"}}}
 
-" Settings for editing text files {{{
+" Settings for editing text files {{{2
 augroup filetype_text
     autocmd!
     autocmd FileType text :echom "Editing a text file:"
@@ -270,9 +273,8 @@ augroup filetype_text
     autocmd FileType text nnoremap <buffer> k gk
     autocmd FileType text nnoremap <buffer> j gj
 augroup END
-"}}}
 
-" Settings for editing markdown files {{{
+" Settings for editing markdown files {{{2
 augroup filetype_markdown
     autocmd!
 
@@ -290,7 +292,6 @@ augroup filetype_markdown
     autocmd FileType markdown :inoreabbrev <buffer> mklink []()<C-o>F[
 
 augroup END
-"}}}
 
 " Abbriviations ---------------{{{1
 
@@ -345,7 +346,12 @@ if has("gui_running")
     set mouse=
     set guioptions=mai
     set guifont=Terminus\ (TTF)\ Medium\ 13,Monospace\ 9
-else
+else "So, in a terminal
     set background=dark
-    colorscheme default
+    if &t_Co == 256
+        colorscheme lucius
+        :LuciusDarkHighContrast
+    else
+        colorscheme default
+    endif
 endif
