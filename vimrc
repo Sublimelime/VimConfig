@@ -175,9 +175,6 @@ inoremap <Up> <C-o>
 " Bind down to insert an expression into the text, ie <C-r>=
 inoremap <Down> <C-r>=
 
-" Bind down in normal mode to close the current window
-nnoremap <Down> :q<cr>
-
 "Bind left and right to switch between tabs
 nnoremap <Left> :tabprevious<cr>
 nnoremap <Right> :tabnext<cr>
@@ -236,16 +233,17 @@ augroup END
 " Settings for editing mediawiki files {{{2
 augroup filetype_mediawiki
     autocmd!
-
+    " Intro messages {{{
     autocmd FileType mediawiki :echom "Editing a mediawiki file:"
     autocmd FileType mediawiki :echom "[Vis] Press <leader>c to comment out text."
     autocmd FileType mediawiki :echom "[Vis] Press <leader>[ to surround text in double square brackets. [[eg]]"
     autocmd FileType mediawiki :echom "[Vis] Press <leader>{ to surround text in curly brackets. {{eg}}"
     autocmd FileType mediawiki :echom "[Ins] Press <leader>== to surround a line in equal signs. ==eg=="
     autocmd FileType mediawiki :echom "[Ins] Type tcode to expand to <code></code>, etc."
+    "}}}
 
     " comment text out
-    autocmd FileType mediawiki :vnoremap <buffer> <leader>c <esc>`>a--><esc>`<i<!--<esc>
+    "autocmd FileType mediawiki :vnoremap <buffer> <leader>c <esc>`>a--><esc>`<i<!--<esc>
 
     " Surround some text in brackets.
     autocmd FileType mediawiki :vnoremap <buffer> <leader>[ <esc>`>a]]<esc>`<i[[<esc>
@@ -254,17 +252,17 @@ augroup filetype_mediawiki
     " Surround a line in equal signs
     autocmd FileType mediawiki :inoremap <buffer> <leader>== <esc>I==<esc>A==<esc>o
 
-    autocmd FileType mediawiki setlocal spell textwidth=120
+    autocmd FileType mediawiki :setlocal spell
 
-    " Setup Snippets
-    autocmd FileType mediawiki :inoreabbrev <buffer> wtable 
-                \{\|<space>class="wikitable"<cr>\|-<cr>!Option1!!Option2!!Option3<cr>\|-<cr>\|Value1\|\|Value2\|\|Value3<cr>\|-<cr>\|}
+    " Setup Snippets {{{
+    autocmd FileType mediawiki :inoreabbrev <buffer> wtable
+                \ {\|<space>class="wikitable"<cr>\|-<cr>!Option1!!Option2!!Option3<cr>\|-<cr>\|Value1\|\|Value2\|\|Value3<cr>\|-<cr>\|}
 
     autocmd FileType mediawiki :inoreabbrev <buffer> cate [[Category:]]<left><left>
-    autocmd FileType mediawiki :inoreabbrev br <br>
-    autocmd FileType mediawiki :inoreabbrev sig --~~~~
+    autocmd FileType mediawiki :inoreabbrev <buffer> br <br>
+    autocmd FileType mediawiki :inoreabbrev <buffer> sig --~~~~
     autocmd FileType mediawiki :call MakeTagAbbrevs("nowiki","pre","code","strong","includeonly","noinclude")
-
+    "}}}
 augroup END
 
 " Settings for editing text files {{{2
@@ -292,6 +290,10 @@ augroup filetype_markdown
 
     " Abbriviations
     autocmd FileType markdown :inoreabbrev <buffer> mklink []()<C-o>F[
+
+    " Maps
+    autocmd FileType markdown nnoremap <buffer> k gk
+    autocmd FileType markdown nnoremap <buffer> j gj
 
 augroup END
 

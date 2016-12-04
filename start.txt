@@ -39,7 +39,6 @@ leader>hs - Toggle search highlighting
 <leader>evf - Edit vimrc file in split
 <leader>svf - Source the vimrc file to update
 s - Preform split change operation.
-Down arrow key - Close current window. Fails if last window, and modified.
 Left/Right arrow keys - Switch tab
 H,L - Rebound to do 'extreme' motions. Eg H=Move to start of line, L=Move to end of line
 
