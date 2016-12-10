@@ -29,7 +29,7 @@ set pastetoggle=<F4>
 set foldcolumn=1 foldmethod=manual foldlevelstart=0 foldnestmax=7
 set nomodeline modelines=1
 set tabstop=4 shiftwidth=4 expandtab
-set ignorecase smartcase noincsearch nowrapscan
+set ignorecase smartcase incsearch magic
 set wildmenu wildignore=.zip,.gz,.exe,.bin,.odt,.ods
 set spelllang=en_us nospell encoding=utf-8
 set viminfo='10,<10,s20,/5,:10,h
@@ -184,6 +184,9 @@ nnoremap <Right> :tabnext<cr>
 nnoremap s <C-w>
 onoremap p i(
 nnoremap Y y$
+nnoremap / /\v
+nnoremap ? ?\v
+
 " Rebind uppercase versions of h,l to do 'extreme' movements
 nnoremap H ^
 nnoremap L $
@@ -243,7 +246,7 @@ augroup filetype_mediawiki
     "}}}
 
     " comment text out
-    "autocmd FileType mediawiki :vnoremap <buffer> <leader>c <esc>`>a--><esc>`<i<!--<esc>
+    autocmd FileType mediawiki :vnoremap <buffer> <leader>c <esc>`>a--><esc>`<i<!--<esc>
 
     " Surround some text in brackets.
     autocmd FileType mediawiki :vnoremap <buffer> <leader>[ <esc>`>a]]<esc>`<i[[<esc>
