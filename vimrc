@@ -109,7 +109,7 @@ endif
 
 " Config for startscreen {{{
 function! Start()
-    read !echo "Today is" $(date)
+    read !echo "Today is" $(date) && pom
     read ~/.vim/start.txt
     :1
 endfunction
@@ -204,7 +204,7 @@ augroup misc
     " CD into the dir of the opened file
     autocmd BufEnter * execute "cd! ".escape(expand("%:p:h"), ' ')
     " Jump back to the last edited position
-    autocmd BufRead * :silent! normal! `.
+    autocmd BufReadPost * if line("'\"") | execute "normal `\"" | endif
     " Exit insert mode automatically after inactivity
     autocmd CursorHoldI * :stopinsert
 augroup END
@@ -243,6 +243,8 @@ augroup filetype_mediawiki
     autocmd FileType mediawiki :echom "[Vis] Press <leader>{ to surround text in curly brackets. {{eg}}"
     autocmd FileType mediawiki :echom "[Ins] Press <leader>== to surround a line in equal signs. ==eg=="
     autocmd FileType mediawiki :echom "[Ins] Type tcode to expand to <code></code>, etc."
+    autocmd FileType mediawiki :echom "[Ins] Type wtable to expand into a MediaWiki table."
+    autocmd FileType mediawiki :echom "[Ins] Type wcollapse to expand into a collapsible text box."
     "}}}
 
     " comment text out
@@ -259,12 +261,17 @@ augroup filetype_mediawiki
 
     " Setup Snippets {{{
     autocmd FileType mediawiki :inoreabbrev <buffer> wtable
-                \ {\|<space>class="wikitable"<cr>\|-<cr>!Option1!!Option2!!Option3<cr>\|-<cr>\|Value1\|\|Value2\|\|Value3<cr>\|-<cr>\|}
+                \ {\|<space>class="wikitable"<cr>\|-<cr>!Option1!!Option2!!Option3<cr>\|-<cr>\|Value1\|\|Value2\|\|Value3
+                \<cr>\|-<cr>\|}
+
+    autocmd FileType mediawiki :inoreabbrev <buffer> wcollapse
+                \ <div class="toccolours mw-collapsible mw-collapsed"<space>style="width:800px"><cr>Show this<cr>
+                \<div class="mw-collapsible-content"><cr>Content here<cr></div></div><cr>
 
     autocmd FileType mediawiki :inoreabbrev <buffer> cate [[Category:]]<left><left>
     autocmd FileType mediawiki :inoreabbrev <buffer> br <br>
     autocmd FileType mediawiki :inoreabbrev <buffer> sig --~~~~
-    autocmd FileType mediawiki :call MakeTagAbbrevs("nowiki","pre","code","strong","includeonly","noinclude")
+    autocmd FileType mediawiki :call MakeTagAbbrevs("nowiki","pre","code","strong","includeonly","noinclude","sup","sub")
     "}}}
 augroup END
 
@@ -339,6 +346,8 @@ inoreabbrev goverment government
 inoreabbrev theyre they're
 inoreabbrev isnt isn't
 inoreabbrev paralell parallel
+inoreabbrev rememver remember
+inoreabbrev tge the
 
 " Command line
 cnoreabbrev man help
