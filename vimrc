@@ -29,10 +29,11 @@ set pastetoggle=<F4>
 set foldcolumn=1 foldmethod=manual foldlevelstart=0 foldnestmax=7
 set nomodeline modelines=1
 set tabstop=4 shiftwidth=4 expandtab
-set ignorecase smartcase incsearch magic
+set ignorecase smartcase incsearch magic hlsearch
 set wildmenu wildignore=.zip,.gz,.exe,.bin,.odt,.ods
 set spelllang=en_us nospell encoding=utf-8
-set viminfo='10,<10,s20,/5,:10,h
+set viminfo='10,<10,s20,/5,:10
+
 
 " Variables/User commands/functions -------------{{{1
 
@@ -54,17 +55,6 @@ function! s:search_open_files(pattern)
 endf
 command! -nargs=1 SearchOpen call <sid>search_open_files(<q-args>)
 "}}}
-
-" Create abbreviations for html tags {{{
-" Call function example: call MakeTagAbbrevs("code","pre","strong")
-" this will make tcode, tpre, tstrong expand into html tags.
-function! MakeTagAbbrevs(...)
-    for tagName in a:000
-        execute "inoreabbrev <buffer> t" . tagName . " <" . tagName . "></" . tagName . "><C-o>F<<C-o>i"
-    endfor
-endfunction
-
-" }}}
 
 " Open the start file readonly, for reference.
 command! Start tab sview ~/.vim/start.txt
@@ -144,10 +134,13 @@ function! ToggleSyntax()
 endfunction
 nnoremap <silent> <leader>sy :call ToggleSyntax()<CR>
 
-" Quickly edit/source .vimrc file
+" Quickly edit/source .vimrc file, and abbrevs file
 nnoremap <leader>evf :15split $MYVIMRC<CR>
 nnoremap <leader>svf :source $MYVIMRC<CR>
+nnoremap <leader>eaf :15split ~/.vim/abbrevs.vim<cr>
 
+" Quickly turn off search highlighting
+nnoremap <space> :nohl<cr>
 
 " Insert mode {{{2
 " Jump back and fix most recent error
@@ -219,138 +212,9 @@ augroup number_toggle
     autocmd WinEnter * :setlocal relativenumber nonumber
 augroup END
 
-" Settings for editing HTML files {{{2
-augroup filetype_html
-    autocmd!
-    autocmd FileType html :echom "Editing a HTML file:"
-    autocmd FileType html :echom "[Vis] Press <leader>c to comment out text."
-    autocmd FileType html :echom "[Ins] Type thtml to expand to <html></html>, etc."
-
-    autocmd FileType html :setlocal nowrap
-    autocmd FileType html :setlocal foldmethod=indent
-    autocmd BufWritePre,BufRead *.html :normal! gg=G
-    autocmd FileType html :vnoremap <buffer> <leader>c <esc>`>a--><esc>`<i<!--<esc>
-    autocmd FileType html :call MakeTagAbbrevs("i","p","html","div","strong","code","h1","h2","h3")
-augroup END
-
-" Settings for editing mediawiki files {{{2
-augroup filetype_mediawiki
-    autocmd!
-    " Intro messages {{{
-    autocmd FileType mediawiki :echom "Editing a mediawiki file:"
-    autocmd FileType mediawiki :echom "[Vis] Press <leader>c to comment out text."
-    autocmd FileType mediawiki :echom "[Vis] Press <leader>[ to surround text in double square brackets. [[eg]]"
-    autocmd FileType mediawiki :echom "[Vis] Press <leader>{ to surround text in curly brackets. {{eg}}"
-    autocmd FileType mediawiki :echom "[Ins] Press <leader>== to surround a line in equal signs. ==eg=="
-    autocmd FileType mediawiki :echom "[Ins] Type tcode to expand to <code></code>, etc."
-    autocmd FileType mediawiki :echom "[Ins] Type wtable to expand into a MediaWiki table."
-    autocmd FileType mediawiki :echom "[Ins] Type wcollapse to expand into a collapsible text box."
-    "}}}
-
-    " comment text out
-    autocmd FileType mediawiki :vnoremap <buffer> <leader>c <esc>`>a--><esc>`<i<!--<esc>
-
-    " Surround some text in brackets.
-    autocmd FileType mediawiki :vnoremap <buffer> <leader>[ <esc>`>a]]<esc>`<i[[<esc>
-    autocmd FileType mediawiki :vnoremap <buffer> <leader>{ <esc>`>a}}<esc>`<i{{<esc>
-
-    " Surround a line in equal signs
-    autocmd FileType mediawiki :inoremap <buffer> <leader>== <esc>I==<esc>A==<esc>o
-
-    autocmd FileType mediawiki :setlocal spell
-
-    " Setup Snippets {{{
-    autocmd FileType mediawiki :inoreabbrev <buffer> wtable
-                \ {\|<space>class="wikitable"<cr>\|-<cr>!Option1!!Option2!!Option3<cr>\|-<cr>\|Value1\|\|Value2\|\|Value3
-                \<cr>\|-<cr>\|}
-
-    autocmd FileType mediawiki :inoreabbrev <buffer> wcollapse
-                \ <div class="toccolours mw-collapsible mw-collapsed"<space>style="width:800px"><cr>Show this<cr>
-                \<div class="mw-collapsible-content"><cr>Content here<cr></div></div><cr>
-
-    autocmd FileType mediawiki :inoreabbrev <buffer> cate [[Category:]]<left><left>
-    autocmd FileType mediawiki :inoreabbrev <buffer> br <br>
-    autocmd FileType mediawiki :inoreabbrev <buffer> sig --~~~~
-    autocmd FileType mediawiki :call MakeTagAbbrevs("nowiki","pre","code","strong","includeonly","noinclude","sup","sub")
-    "}}}
-augroup END
-
-" Settings for editing text files {{{2
-augroup filetype_text
-    autocmd!
-    autocmd FileType text :echom "Editing a text file:"
-    autocmd FileType text setlocal spell modeline
-    autocmd FileType text nnoremap <buffer> k gk
-    autocmd FileType text nnoremap <buffer> j gj
-augroup END
-
-" Settings for editing markdown files {{{2
-augroup filetype_markdown
-    autocmd!
-
-    autocmd FileType markdown :echom "Editing a markdown file:"
-    autocmd FileType markdown :echom "[Vis] Press <leader>i to italicize some text."
-    autocmd FileType markdown :echom "[Vis] Press <leader>b to bolden some text."
-    autocmd FileType markdown :echom "[Ins] mklink - []()"
-    autocmd FileType markdown :setlocal spell modeline conceallevel=1
-
-    " Text formatting
-    autocmd FileType markdown :vnoremap <buffer> <leader>i <esc>`>a*<esc>`<i*<esc>
-    autocmd FileType markdown :vnoremap <buffer> <leader>b <esc>`>a**<esc>`<i**<esc>
-
-    " Abbriviations
-    autocmd FileType markdown :inoreabbrev <buffer> mklink []()<C-o>F[
-
-    " Maps
-    autocmd FileType markdown nnoremap <buffer> k gk
-    autocmd FileType markdown nnoremap <buffer> j gj
-
-augroup END
-
 " Abbriviations ---------------{{{1
 
-" Insert mode
-inoreabbrev i I
-inoreabbrev recieve receive
-inoreabbrev english English
-inoreabbrev america America
-inoreabbrev tf2 Team Fortress 2
-inoreabbrev factorio Factorio
-inoreabbrev tm &trade;
-inoreabbrev thier their
-inoreabbrev youre you're
-inoreabbrev cant can't
-inoreabbrev wont won't
-inoreabbrev dont don't
-inoreabbrev havent haven't
-inoreabbrev neccesary necessary
-inoreabbrev neccessary necessary
-inoreabbrev ive I've
-inoreabbrev im I'm
-inoreabbrev hes he's
-inoreabbrev noah Noah
-inoreabbrev tset test
-inoreabbrev wiki Wiki
-inoreabbrev monday Monday
-inoreabbrev tuesday Tuesday
-inoreabbrev wednesday Wednesday
-inoreabbrev thursday Thursday
-inoreabbrev friday Friday
-inoreabbrev saturday Saturday
-inoreabbrev sunday Sunday
-inoreabbrev occor occur
-inoreabbrev occorring occurring
-inoreabbrev didnt didn't
-inoreabbrev thats that's
-inoreabbrev goverment government
-inoreabbrev theyre they're
-inoreabbrev isnt isn't
-inoreabbrev paralell parallel
-inoreabbrev rememver remember
-inoreabbrev tge the
-
-" Command line
-cnoreabbrev man help
+source ~/.vim/abbrevs.vim
 
 " Graphical Options -------------------{{{1
 
