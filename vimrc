@@ -81,6 +81,9 @@ command! StripWhitespace call <sid>StripWhitespace()
 " View the difference between the current buffer and it's file on disk.
 command! DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis | wincmd p | diffthis
 
+" Force quit vim, no matter what
+command! ForceQuit bufdo setlocal nomodified | :q!
+
 " Plugin config ------------{{{1
 
 " Config for autoclose
@@ -88,6 +91,9 @@ let g:AutoClosePairs = {'(': ')', '{': '}', '[': ']', '"': '"'}
 
 " Config for Bullets
 let g:bullets_enabled_file_types = ['markdown', 'mediawiki']
+
+" Config for RainbowParentheses
+let g:rainbow_active = 1
 
 " Config for NeatStatus {{{
 if !has("gui_running") && &t_Co == 256
@@ -102,6 +108,7 @@ function! Start()
     read !echo "Today is" $(date) && pom
     read ~/.vim/start.txt
     :1
+    setlocal foldmethod=marker
 endfunction
 let g:Startscreen_function = function('Start')
 " }}}
