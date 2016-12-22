@@ -37,3 +37,5 @@ inoreabbrev isnt isn't
 inoreabbrev paralell parallel
 inoreabbrev rememver remember
 inoreabbrev tge the
+inoreabbrev seperate separate
+inoreabbrev connectable connectible

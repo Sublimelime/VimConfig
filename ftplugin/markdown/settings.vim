@@ -1,7 +1,7 @@
 :echom "Editing a markdown file:"
 :echom "[Vis] Press <leader>i to italicize some text."
 :echom "[Vis] Press <leader>b to bolden some text."
-:setlocal spell modeline conceallevel=1
+:setlocal spell modeline conceallevel=2 wrap
 
 " Text formatting
 :vnoremap <buffer> <leader>i <esc>`>a*<esc>`<i*<esc>

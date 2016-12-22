@@ -132,14 +132,14 @@ nnoremap <silent> <leader>hs :setlocal hls!<cr>
 nnoremap <leader>wc g<C-g>
 
 " Toggle syntax highlighting
-function! ToggleSyntax()
+function! s:ToggleSyntax()
     if exists("g:syntax_on")
         syntax off
     else
         syntax enable
     endif
 endfunction
-nnoremap <silent> <leader>sy :call ToggleSyntax()<CR>
+nnoremap <silent> <leader>sy :call <sid>ToggleSyntax()<CR>
 
 " Quickly edit/source .vimrc file, and abbrevs file
 nnoremap <leader>evf :15split $MYVIMRC<CR>
@@ -148,6 +148,9 @@ nnoremap <leader>eaf :15split ~/.vim/abbrevs.vim<cr>
 
 " Quickly turn off search highlighting
 nnoremap <space> :nohl<cr>
+
+" Transpose two words
+nnoremap <C-t> diwbPa<space><esc>
 
 " Insert mode {{{2
 " Jump back and fix most recent error

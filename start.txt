@@ -42,6 +42,8 @@ leader>hs - Toggle search highlighting
 s - Preform split change operation.
 Left/Right arrow keys - Switch tab
 H,L - Rebound to do 'extreme' motions. Eg H=Move to start of line, L=Move to end of line
+<Space> - Clear search highlighting.
+<C-t> - Transpose two words. Put cursor on second word.
 
 Binds for plugins normal ------------------------------- {{{1
 ShowMarks:
