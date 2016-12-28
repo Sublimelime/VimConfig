@@ -49,6 +49,9 @@ setlocal fileencoding=utf-8
 " Surround a line in equal signs
 :inoremap <buffer> <leader>== <esc>I==<esc>A==<esc>o
 
+" Surround some text in apostrophes.
+:vnoremap <buffer> <leader>' <esc>`>a'<esc>`<i'<esc>
+
 :setlocal spell
 
 " Setup Snippets {{{
