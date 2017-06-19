@@ -4,11 +4,11 @@
 set nocompatible
 
 " Create missing directories, if any {{{2
-if !isdirectory($HOME.'/.vim/backup/undo')
-    silent call mkdir($HOME.'/.vim/backup/undo', 'p')
-endif
 if !isdirectory($HOME.'/.vim/swap')
     silent call mkdir($HOME.'/.vim/swap','p')
+endif
+if !isdirectory($HOME.'/.vim/backup')
+    silent call mkdir($HOME.'/.vim/backup','p')
 endif
 if !isdirectory($HOME.'/.vim/sessions')
     silent call mkdir($HOME.'/.vim/sessions', 'p')
@@ -20,7 +20,7 @@ set relativenumber nonumber
 syntax on
 set noconfirm title ruler hidden lazyredraw noshowmatch autoindent autoread concealcursor=n
 set backup writebackup backupdir=~/.vim/backup,.
-set undofile undodir=~/.vim/backup/undo,.
+set noundofile
 set swapfile directory=~/.vim/swap,/tmp,.
 set lbr textwidth=0 showcmd scrolloff=1 switchbuf=useopen,usetab cursorline
 set sessionoptions=curdir,tabpages,folds,buffers,help
@@ -31,8 +31,9 @@ set nomodeline modelines=1
 set tabstop=4 shiftwidth=4 expandtab
 set ignorecase smartcase incsearch magic hlsearch
 set wildmenu wildignore=.zip,.gz,.exe,.bin,.odt,.ods
-set spelllang=en_us nospell encoding=utf-8
+set spelllang=en nospell encoding=utf-8
 set viminfo='10,<10,s20,/5,:10
+set gdefault
 
 
 " Variables/User commands/functions -------------{{{1
@@ -55,9 +56,6 @@ function! s:search_open_files(pattern)
 endf
 command! -nargs=1 SearchOpen call <sid>search_open_files(<q-args>)
 "}}}
-
-" Open the start file readonly, for reference.
-command! Start tab sview ~/.vim/start.txt
 
 " Remove extra whitespace {{{
 function! s:StripWhitespace()
@@ -85,48 +83,19 @@ command! DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis | wincmd p | d
 command! ForceQuit bufdo setlocal nomodified | :q!
 
 " Plugin config ------------{{{1
-
 " Config for autoclose
 let g:AutoClosePairs = {'(': ')', '{': '}', '[': ']', '"': '"'}
-
-" Config for Bullets
-let g:bullets_enabled_file_types = ['markdown', 'mediawiki']
 
 " Config for RainbowParentheses
 let g:rainbow_active = 1
 
-" Config for NeatStatus {{{
-if !has("gui_running") && &t_Co == 256
-    let g:NeatStatusLine_color_filetype = 'guifg=#ffffff guibg=#000000 gui=bold ctermfg=White ctermbg=Black cterm=bold'
-else
-    let g:NeatStatusLine_color_filetype = 'guifg=#ffffff guibg=#000000 gui=bold ctermfg=15 ctermbg=9 cterm=bold'
-endif
 "}}}
-
-" Config for startscreen {{{
-function! Start()
-    read !echo "Today is" $(date) && pom
-    read ~/.vim/start.txt
-    :1
-    setlocal foldmethod=marker
-endfunction
-let g:Startscreen_function = function('Start')
-" }}}
-
-" Config for BufExplorer {{{
-let g:bufExplorerDisableDefaultKeyMapping=1
-let g:bufExplorerShowNoName=1
-nnoremap <leader>b :BufExplorer<cr>
-" }}}
 
 " Keybinds ------------------{{{1
 
 " Normal mode {{{2
 " Command to toggle spell checking
 nnoremap <F10> <Esc>:setlocal spell!<cr>
-
-" Toggling search word highlighting, toggle with shift-h
-nnoremap <silent> <leader>hs :setlocal hls!<cr>
 
 " View word count
 nnoremap <leader>wc g<C-g>
@@ -145,12 +114,10 @@ nnoremap <silent> <leader>sy :call <sid>ToggleSyntax()<CR>
 nnoremap <leader>evf :15split $MYVIMRC<CR>
 nnoremap <leader>svf :source $MYVIMRC<CR>
 nnoremap <leader>eaf :15split ~/.vim/abbrevs.vim<cr>
+nnoremap <leader>saf :source ~/.vim/abbrevs.vim<cr>
 
 " Quickly turn off search highlighting
 nnoremap <space> :nohl<cr>
-
-" Transpose two words
-nnoremap <C-t> diwbPa<space><esc>
 
 " Insert mode {{{2
 " Jump back and fix most recent error
@@ -179,8 +146,8 @@ inoremap <Up> <C-o>
 inoremap <Down> <C-r>=
 
 "Bind left and right to switch between tabs
-nnoremap <Left> :tabprevious<cr>
-nnoremap <Right> :tabnext<cr>
+nnoremap <Left> <nop>
+nnoremap <Right> <nop>
 
 "}}}
 " Misc self-explanatory binds {{{
@@ -210,6 +177,7 @@ augroup misc
     autocmd BufReadPost * if line("'\"") | execute "normal `\"" | endif
     " Exit insert mode automatically after inactivity
     autocmd CursorHoldI * :stopinsert
+    autocmd BufWritePre :StripWhitespace
 augroup END
 
 
@@ -229,20 +197,4 @@ source ~/.vim/abbrevs.vim
 " Graphical Options -------------------{{{1
 
 set columns=135 lines=33
-
-if has("gui_running")
-    set background=light
-    colorscheme lucius
-    :LuciusLightLowContrast
-    set mouse=
-    set guioptions=mai
-    set guifont=Terminus\ (TTF)\ Medium\ 13,Monospace\ 9
-else "So, in a terminal
-    set background=dark
-    if &t_Co == 256
-        colorscheme lucius
-        :LuciusDarkHighContrast
-    else
-        colorscheme default
-    endif
-endif
+set mouse=

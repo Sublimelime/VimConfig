@@ -28,17 +28,6 @@ nnoremap <buffer> $ g$
 " utf-8 should be set if not already done globally
 setlocal fileencoding=utf-8
 
-" Intro messages {{{
-:echom "Editing a mediawiki file:"
-:echom "[Vis] Press <leader>c to comment out text."
-:echom "[Vis] Press <leader>[ to surround text in double square brackets. [[eg]]"
-:echom "[Vis] Press <leader>{ to surround text in curly brackets. {{eg}}"
-:echom "[Ins] Press <leader>== to surround a line in equal signs. ==eg=="
-:echom "[Ins] Type tcode to expand to <code></code>, etc."
-:echom "[Ins] Type wtable to expand into a MediaWiki table."
-:echom "[Ins] Type wcollapse to expand into a collapsible text box."
-    "}}}
-
 " comment text out
 :vnoremap <buffer> <leader>c <esc>`>a--><esc>`<i<!--<esc>
 
@@ -65,5 +54,6 @@ setlocal fileencoding=utf-8
 :inoreabbrev <buffer> cate [[Category:]]<left><left>
 :inoreabbrev <buffer> br <br>
 :inoreabbrev <buffer> sig --~~~~
+:inoreabbrev <buffer> tcolor <span style=\"color:\"></span>
 :call s:MakeTagAbbrevs("nowiki","pre","code","strong","includeonly","noinclude","sup","sub")
 "}}}
