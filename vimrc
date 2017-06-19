@@ -201,3 +201,4 @@ source ~/.vim/abbrevs.vim
 
 set columns=135 lines=33
 set mouse=
+colorscheme oceanlight
