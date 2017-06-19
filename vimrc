@@ -201,4 +201,15 @@ source ~/.vim/abbrevs.vim
 
 set columns=135 lines=33
 set mouse=
-colorscheme oceanlight
+colorscheme tango
+set guioptions=mai
+set guifont=Terminus\ (TTF)\ Medium\ 9,Monospace\ 9
+
+" Statusline config
+
+set laststatus=2
+set statusline=
+set statusline+=\ #%n\ %F%m\ %a%< " Number of buffer, file name, argument num
+set statusline+=%=%r%h%w%{&ff}    " Buffer status info like RO, file format
+set statusline+=%y                " file type, modified flag
+set statusline+=\ \ (%l/%L)\ %p%% " Line position
