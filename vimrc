@@ -119,6 +119,9 @@ nnoremap <leader>saf :source ~/.vim/abbrevs.vim<cr>
 " Quickly turn off search highlighting
 nnoremap <space> :nohl<cr>
 
+" Quickly reindent file
+nnoremap <leader>i mzgg=G`z
+
 " Insert mode {{{2
 " Jump back and fix most recent error
 inoremap <C-s> <esc>[sz=
@@ -145,7 +148,7 @@ inoremap <Up> <C-o>
 " Bind down to insert an expression into the text, ie <C-r>=
 inoremap <Down> <C-r>=
 
-"Bind left and right to switch between tabs
+" Unbind left and right
 nnoremap <Left> <nop>
 nnoremap <Right> <nop>
 
@@ -177,7 +180,7 @@ augroup misc
     autocmd BufReadPost * if line("'\"") | execute "normal `\"" | endif
     " Exit insert mode automatically after inactivity
     autocmd CursorHoldI * :stopinsert
-    autocmd BufWritePre :StripWhitespace
+    autocmd BufWritePre * :StripWhitespace
 augroup END
 
 
