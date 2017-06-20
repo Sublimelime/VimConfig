@@ -26,10 +26,11 @@ set lbr textwidth=0 showcmd scrolloff=1 switchbuf=useopen,usetab cursorline
 set sessionoptions=curdir,tabpages,folds,buffers,help
 set timeoutlen=1500 ttimeout ttimeoutlen=1500 timeout updatetime=7000
 set pastetoggle=<F4>
+set path+=** "Search down into subdirs
 set foldcolumn=1 foldmethod=manual foldlevelstart=0 foldnestmax=7
 set nomodeline modelines=1
 set tabstop=4 shiftwidth=4 expandtab
-set ignorecase smartcase incsearch magic hlsearch
+set ignorecase infercase smartcase incsearch magic hlsearch
 set wildmenu wildignore=.zip,.gz,.exe,.bin,.odt,.ods
 set spelllang=en nospell encoding=utf-8
 set viminfo='10,<10,s20,/5,:10
@@ -100,7 +101,7 @@ nnoremap <F10> <Esc>:setlocal spell!<cr>
 " View word count
 nnoremap <leader>wc g<C-g>
 
-" Toggle syntax highlighting
+" Toggle syntax highlighting {{{
 function! s:ToggleSyntax()
     if exists("g:syntax_on")
         syntax off
@@ -109,6 +110,7 @@ function! s:ToggleSyntax()
     endif
 endfunction
 nnoremap <silent> <leader>sy :call <sid>ToggleSyntax()<CR>
+"}}}
 
 " Quickly edit/source .vimrc file, and abbrevs file
 nnoremap <leader>evf :15split $MYVIMRC<CR>
@@ -122,6 +124,9 @@ nnoremap <space> :nohl<cr>
 " Quickly reindent file
 nnoremap <leader>i mzgg=G`z
 
+" Quick switch buffer
+nnoremap <leader>b :ls<CR>:buf<Space>
+
 " Insert mode {{{2
 " Jump back and fix most recent error
 inoremap <C-s> <esc>[sz=
@@ -130,9 +135,12 @@ inoremap <C-s> <esc>[sz=
 inoremap jk <esc>l
 inoremap <esc> <nop>
 
+" Make c-return start a new line in insert mode
+inoremap <C-Return> <esc>o
+
 " Visual mode {{{2
 " Sort selected text
-nnoremap s :sort<cr>
+vnoremap s :sort<cr>
 
 " Move highlighted text up and down in visual mode
 vnoremap <Down> :m '>+1<CR>gv=gv
@@ -148,9 +156,9 @@ inoremap <Up> <C-o>
 " Bind down to insert an expression into the text, ie <C-r>=
 inoremap <Down> <C-r>=
 
-" Unbind left and right
-nnoremap <Left> <nop>
-nnoremap <Right> <nop>
+" Left and right switch tab
+nnoremap <Left> :tabprevious<cr>
+nnoremap <Right> :tabn<cr>
 
 "}}}
 " Misc self-explanatory binds {{{
@@ -159,6 +167,8 @@ onoremap p i(
 nnoremap Y y$
 nnoremap / /\v
 nnoremap ? ?\v
+onoremap / /\v
+onoremap ? ?\v
 
 " Rebind uppercase versions of h,l to do 'extreme' movements
 nnoremap H ^
@@ -174,12 +184,9 @@ augroup misc
     autocmd FileType conf :setlocal nowrap
     autocmd FileType gitcommit :setlocal nobackup noswapfile
     autocmd FileType help :set nospell
-    " CD into the dir of the opened file
-    autocmd BufEnter * execute "cd! ".escape(expand("%:p:h"), ' ')
-    " Jump back to the last edited position
-    autocmd BufReadPost * if line("'\"") | execute "normal `\"" | endif
     " Exit insert mode automatically after inactivity
     autocmd CursorHoldI * :stopinsert
+    " Clean buffer on save
     autocmd BufWritePre * :StripWhitespace
 augroup END
 
