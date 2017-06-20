@@ -83,6 +83,14 @@ command! DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis | wincmd p | d
 " Force quit vim, no matter what
 command! ForceQuit bufdo setlocal nomodified | :q!
 
+" More text objects, creates operator bindings for all the listed chars below, allowing operations between them.
+for char in [ '_', '-', '.', ':', ',', ';', '<bar>', '/', '<bslash>', '*', '+', '%', '`' ]
+    :silent! execute 'xnoremap i' . char . ' :<C-u>normal! T' . char . 'vt' . char . '<CR>'
+    :silent! execute 'onoremap i' . char . ' :normal vi' . char . '<CR>'
+    :silent! execute 'xnoremap a' . char . ' :<C-u>normal! F' . char . 'vf' . char . '<CR>'
+    :silent! execute 'onoremap a' . char . ' :normal va' . char . '<CR>'
+endfor
+
 " Plugin config ------------{{{1
 " Config for autoclose
 let g:AutoClosePairs = {'(': ')', '{': '}', '[': ']', '"': '"'}
@@ -91,7 +99,6 @@ let g:AutoClosePairs = {'(': ')', '{': '}', '[': ']', '"': '"'}
 let g:rainbow_active = 1
 
 "}}}
-
 " Keybinds ------------------{{{1
 
 " Normal mode {{{2
@@ -138,6 +145,9 @@ inoremap <esc> <nop>
 " Make c-return start a new line in insert mode
 inoremap <C-Return> <esc>o
 
+" Make c-backspace delete a word
+inoremap <C-BS> <esc>bcw
+
 " Visual mode {{{2
 " Sort selected text
 vnoremap s :sort<cr>
@@ -145,6 +155,7 @@ vnoremap s :sort<cr>
 " Move highlighted text up and down in visual mode
 vnoremap <Down> :m '>+1<CR>gv=gv
 vnoremap <Up> :m '<-2<CR>gv=gv
+
 "}}}2
 " Change function of arrow keys {{{
 inoremap <Left> <nop>
@@ -169,6 +180,8 @@ nnoremap / /\v
 nnoremap ? ?\v
 onoremap / /\v
 onoremap ? ?\v
+" Disables Ex mode
+nnoremap Q <nop>
 
 " Rebind uppercase versions of h,l to do 'extreme' movements
 nnoremap H ^
