@@ -1,7 +1,7 @@
 " Create abbreviations for html tags {{{
 " Call function example: call MakeTagAbbrevs("code","pre","strong")
 " this will make tcode, tpre, tstrong expand into html tags.
-function! s:MakeTagAbbrevs(...)
+function! s:makeTagAbbrevs(...)
     for tagName in a:000
         execute "inoreabbrev <buffer> t" . tagName . " <" . tagName . "></" . tagName . "><C-o>F<<C-o>i"
     endfor
@@ -42,6 +42,8 @@ setlocal fileencoding=utf-8
 :vnoremap <buffer> <leader>' <esc>`>a'<esc>`<i'<esc>
 
 :setlocal spell
+setlocal complete=.,w,b,u,i,k
+
 
 " Setup Snippets {{{
 :inoreabbrev <buffer> wtable
@@ -54,6 +56,7 @@ setlocal fileencoding=utf-8
 :inoreabbrev <buffer> cate [[Category:]]<left><left>
 :inoreabbrev <buffer> br <br>
 :inoreabbrev <buffer> sig --~~~~
-:inoreabbrev <buffer> tcolor <span style=\"color:\"></span>
-:call s:MakeTagAbbrevs("nowiki","pre","code","strong","includeonly","noinclude","sup","sub")
+:inoreabbrev <buffer> wcolor <span style="color:"></span>
+:inoreabbrev <buffer> whistory {{History<bar>0.1.0<bar><cr>*<space>Introduced}}
+:call <SID>makeTagAbbrevs("nowiki","pre","code","strong","includeonly","noinclude","sup","sub")
 "}}}

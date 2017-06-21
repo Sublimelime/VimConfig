@@ -1,26 +1,26 @@
 " Insert mode
 
-augroup mediawikiabbrevs
-    autocmd!
-    autocmd FileType mediawiki inoreabbrev <buffer> factorio Factorio
-    autocmd FileType mediawiki inoreabbrev <buffer> ingame in-game
-    autocmd FileType mediawiki inoreabbrev <buffer> lua Lua
-augroup END
+function! s:mediawikiAbbrevs() " {{{
+    inoreabbrev <buffer> factorio Factorio
+    inoreabbrev <buffer> ingame in-game
+    inoreabbrev <buffer> lua Lua
+    inoreabbrev <buffer> wube Wube
+endfunc
+" }}}
 
-function! s:luaAbbrevs()
+function! s:luaAbbrevs() " {{{
     inoreabbrev <buffer> def defines
     inoreabbrev <buffer> func function
     inoreabbrev <buffer> g global
     inoreabbrev <buffer> l local
-    inoreabbrev <buffer> sonev script
+    inoreabbrev <buffer> sonev script.on_event(
+    inoreabbrev <buffer> sonin script.on_init(
+    inoreabbrev <buffer> fori for index, something in pairs() do<esc>2Fs
+    inoreabbrev <buffer> gp game.print()<left>
 endfunc
+" }}}
 
-augroup luaabbrevs
-    autocmd!
-    autocmd FileType lua :call s:luaAbbrevs()
-augroup END
-
-function! s:textAbbrevs()
+function! s:textAbbrevs() " {{{
     inoreabbrev <buffer> america America
     inoreabbrev <buffer> api API
     inoreabbrev <buffer> cant can't
@@ -76,10 +76,13 @@ function! s:textAbbrevs()
     inoreabbrev <buffer> wont won't
     inoreabbrev <buffer> wouldve would've
     inoreabbrev <buffer> ymmv your mileage may vary
-    inoreabbrev <buffer> youre you're"
+    inoreabbrev <buffer> youre you're
 endfunc
+" }}}
 
-augroup textabbrevs
+augroup abbrevsaugroup
     autocmd!
-    autocmd FileType text,mediawiki,markdown :call s:textAbbrevs()
+    autocmd FileType lua :call <SID>luaAbbrevs()
+    autocmd FileType mediawiki :call <SID>mediawikiAbbrevs()
+    autocmd FileType text,mediawiki,markdown :call <SID>textAbbrevs()
 augroup END
