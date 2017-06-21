@@ -253,5 +253,5 @@ set statusline=
 set statusline+=\ #%n\ %F%m\ %a%< " Number of buffer, file name, modified flag, argument num
 set statusline+=\ \ <%{mode()}> " Show current mode in statusline
 set statusline+=%=%r\ %h\ %w%{&ff}    " Buffer status info like RO, file format
-set statusline+=%y                " file type
+set statusline+=%y                " file type in brackets
 set statusline+=\ \ (%l/%L)\ %p%% " Line position
