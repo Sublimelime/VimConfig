@@ -148,7 +148,6 @@ nnoremap <leader>i mzgg=G`z
 " Quick switch buffer
 nnoremap <leader>b :ls<CR>:buf<Space>
 
-
 " Insert mode {{{2
 " Jump back and fix most recent error
 inoremap <C-s> <esc>[sz=
