@@ -5,6 +5,18 @@ function! s:mediawikiAbbrevs() " {{{
     inoreabbrev <buffer> ingame in-game
     inoreabbrev <buffer> lua Lua
     inoreabbrev <buffer> wube Wube
+    :inoreabbrev <buffer> wtable
+                \ {<bar><space>class="wikitable"<cr><bar>-<cr>!Option1!!Option2!!Option3<cr><bar>-<cr><bar>Value1<bar><bar>Value2<bar><bar>Value3<cr><bar>-<cr><bar>}
+
+    :inoreabbrev <buffer> wcollapse
+                \ <div class="toccolours mw-collapsible mw-collapsed"<space>style="width:800px"><cr>Show this<cr>
+                \<div class="mw-collapsible-content"><cr>Content here<cr></div></div><cr>
+
+    :inoreabbrev <buffer> cate [[Category:]]<left><left>
+    :inoreabbrev <buffer> br <br>
+    :inoreabbrev <buffer> sig --~~~~
+    :inoreabbrev <buffer> wcolor <span style="color:"></span>
+    :inoreabbrev <buffer> whistory {{History<bar>0.1.0<bar><cr>*<space>Introduced}}
 endfunc
 " }}}
 

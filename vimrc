@@ -213,6 +213,9 @@ cnoremap w!! w !sudo tee %
 
 " Autocommand (groups) ----------------{{{1
 
+" Source the autocmd file
+source ~/.vim/autocmds.vim
+
 " Misc filetypes/autocmds not worth dedicating a group to. {{{2
 augroup misc
     autocmd!

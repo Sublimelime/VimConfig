@@ -9,12 +9,5 @@ endfunction
 
 " }}}
 if (&filetype == 'html') "Because of conflicts with the markdown support 
-    :echom "Editing a HTML file:"
-    :echom "[Vis] Press <leader>c to comment out text."
-    :echom "[Ins] Type thtml to expand to <html></html>, etc."
-
-    :setlocal nowrap
-    :setlocal foldmethod=indent
-    :vnoremap <buffer> <leader>c <esc>`>a--><esc>`<i<!--<esc>
     :call s:MakeTagAbbrevs("i","p","html","div","strong","code","h1","h2","h3")
 endif
