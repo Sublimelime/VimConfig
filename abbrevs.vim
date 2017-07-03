@@ -25,8 +25,11 @@ function! s:luaAbbrevs() " {{{
     inoreabbrev <buffer> func function
     inoreabbrev <buffer> g global
     inoreabbrev <buffer> l local
-    inoreabbrev <buffer> sonev script.on_event(
+    inoreabbrev <buffer> sonev script.on_event(defines.events.
     inoreabbrev <buffer> sonin script.on_init(
+    inoreabbrev <buffer> soncfg script.on_configuration_changed(
+    inoreabbrev <buffer> neq name =
+    inoreabbrev <buffer> teq type =
     inoreabbrev <buffer> fori for index, something in pairs() do<esc>2Fs
     inoreabbrev <buffer> gp game.print()<left>
 endfunc

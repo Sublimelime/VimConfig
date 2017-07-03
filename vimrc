@@ -23,7 +23,7 @@ set backup writebackup backupdir=~/.vim/backup,.
 set noundofile
 set swapfile directory=~/.vim/swap,/tmp,.
 set lbr textwidth=0 showcmd scrolloff=1 switchbuf=useopen,usetab cursorline
-set sessionoptions=curdir,tabpages,folds,buffers,help
+set sessionoptions=curdir,tabpages,folds,buffers,help,winsize
 set timeoutlen=1500 ttimeout ttimeoutlen=1500 timeout updatetime=7000
 set pastetoggle=<F4>
 set path+=** "Search down into subdirs
@@ -36,6 +36,7 @@ set spelllang=en nospell encoding=utf-8
 set viminfo='10,<10,s20,/0,:10
 set dictionary=/usr/share/dict/words
 set complete=.,w,b,u,i
+set nolist listchars=tab:\|.
 
 " Variables/User commands/functions -------------{{{1
 
@@ -148,13 +149,15 @@ nnoremap <leader>i mzgg=G`z
 " Quick switch buffer
 nnoremap <leader>b :ls<CR>:buf<Space>
 
+" Toggle list mode
+nnoremap <leader>l :setlocal list!<cr>
+
 " Insert mode {{{2
 " Jump back and fix most recent error
 inoremap <C-s> <esc>[sz=
 
 " Make getting into normal mode easier
-inoremap jk <esc>l
-inoremap <esc> <nop>
+inoremap jk <esc>
 
 " Make c-return start a new line in insert mode
 inoremap <C-Return> <esc>o
@@ -225,6 +228,7 @@ augroup misc
     autocmd FileType help :setlocal nospell
     " Exit insert mode automatically after inactivity
     autocmd CursorHoldI * :stopinsert
+    autocmd CursorHold * :nohls
     " Clean buffer on save
     autocmd BufWritePre * :StripWhitespace
 augroup END
@@ -245,7 +249,8 @@ source ~/.vim/abbrevs.vim
 " Graphical Options -------------------{{{1
 
 set mouse=
-colorscheme tango
+set background=dark
+colorscheme srcery
 set guioptions=mai
 set guifont=Terminus\ (TTF)\ Medium\ 9,Monospace\ 9
 

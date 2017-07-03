@@ -4,10 +4,10 @@
 augroup lispaugroup
     autocmd!
     " Create a command to fetch docs on a lisp symbol.
-    autocmd FileType lisp command! -buffer -nargs=1 LispDoc :!gcl -batch -eval "(describe <args>)" <bar> more
+    autocmd FileType lisp command! -buffer -nargs=1 LispDoc :!sbcl --noinform --quit --eval "(describe <args>)" <bar> more
 
     " Set makeprg so :make runs the current file
-    autocmd FileType lisp setlocal makeprg=gcl\ -batch\ -load\ %
+    autocmd FileType lisp setlocal makeprg=sbcl\ --script\ %
 augroup END
 
 " Mediawiki {{{1
