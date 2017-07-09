@@ -18,12 +18,12 @@ endif
 filetype indent plugin on
 set relativenumber nonumber
 syntax on
-set confirm noshowmode title autoread autoindent ruler hidden lazyredraw noshowmatch concealcursor=n
+set confirm noshowmode title autoread autoindent ruler hidden lazyredraw showmatch concealcursor=n
 set backup writebackup backupdir=~/.vim/backup,.
 set noundofile
 set swapfile directory=~/.vim/swap,/tmp,.
 set lbr textwidth=0 showcmd scrolloff=1 switchbuf=useopen,usetab cursorline
-set sessionoptions=curdir,tabpages,folds,buffers,help,winsize
+set sessionoptions=sesdir,tabpages,folds,buffers,resize,winsize,winpos
 set timeoutlen=1500 ttimeout ttimeoutlen=1500 timeout updatetime=7000
 set pastetoggle=<F4>
 set path+=** "Search down into subdirs
@@ -86,14 +86,6 @@ command! DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis | wincmd p | d
 " Force quit vim, no matter what
 command! ForceQuit bufdo setlocal nomodified | :q!
 
-" More text objects, creates operator bindings for all the listed chars below, allowing operations between them. {{{
-for char in [ '_', '-', '.', ':', ',', ';', '<bar>', '/', '<bslash>', '*', '+', '%', '`' ]
-    :silent! execute 'xnoremap i' . char . ' :<C-u>normal! T' . char . 'vt' . char . '<CR>'
-    :silent! execute 'onoremap i' . char . ' :normal vi' . char . '<CR>'
-    :silent! execute 'xnoremap a' . char . ' :<C-u>normal! F' . char . 'vf' . char . '<CR>'
-    :silent! execute 'onoremap a' . char . ' :normal va' . char . '<CR>'
-endfor
-" }}}
 
 " Tab completion {{{
 function! s:tabOrComplete()
@@ -114,105 +106,9 @@ let g:AutoClosePairs = {'(': ')', '{': '}', '[': ']', '"': '"'}
 let g:rainbow_active = 1
 
 "}}}
-" Keybinds ------------------{{{1
+" Keybinds {{{1
 
-" Normal mode {{{2
-" Command to toggle spell checking
-nnoremap <F10> <Esc>:setlocal spell!<cr>
-
-" View word count
-nnoremap <leader>wc g<C-g>
-
-" Toggle syntax highlighting {{{
-function! s:ToggleSyntax()
-    if exists("g:syntax_on")
-        syntax off
-    else
-        syntax enable
-    endif
-endfunction
-nnoremap <silent> <leader>sy :call <sid>ToggleSyntax()<CR>
-"}}}
-
-" Quickly edit/source .vimrc file, and abbrevs file
-nnoremap <leader>evf :15split $MYVIMRC<CR>
-nnoremap <leader>svf :source $MYVIMRC<CR>
-nnoremap <leader>eaf :15split ~/.vim/abbrevs.vim<cr>
-nnoremap <leader>saf :source ~/.vim/abbrevs.vim<cr>
-
-" Quickly turn off search highlighting
-nnoremap <space> :nohl<cr>
-
-" Quickly reindent file
-nnoremap <leader>i mzgg=G`z
-
-" Quick switch buffer
-nnoremap <leader>b :ls<CR>:buf<Space>
-
-" Toggle list mode
-nnoremap <leader>l :setlocal list!<cr>
-
-" Insert mode {{{2
-" Jump back and fix most recent error
-inoremap <C-s> <esc>[sz=
-
-" Make getting into normal mode easier
-inoremap jk <esc>
-
-" Make c-return start a new line in insert mode
-inoremap <C-Return> <esc>o
-
-" Make c-backspace delete a word
-inoremap <C-BS> <esc>bcw
-
-" Visual mode {{{2
-" Sort selected text
-vnoremap s :sort<cr>
-
-" Move highlighted text up and down in visual mode
-vnoremap <Down> :m '>+1<CR>gv=gv
-vnoremap <Up> :m '<-2<CR>gv=gv
-
-"}}}2
-" Change function of arrow keys {{{
-inoremap <Left> <nop>
-inoremap <Right> <nop>
-
-" Bind up to enter ONE normal mode command, ie <c-o>
-inoremap <Up> <C-o>
-
-" Bind down to insert an expression into the text, ie <C-r>=
-inoremap <Down> <C-r>=
-
-" Left and right switch tab
-nnoremap <Left> :tabprevious<cr>
-nnoremap <Right> :tabn<cr>
-
-" Increase and decrease numbers easily
-nnoremap <Up> <C-a>
-nnoremap <Down> <C-x>
-
-"}}}
-" Misc binds {{{
-nnoremap s <C-w>
-" Disables diff with :only
-nnoremap <silent> <C-w>o :diffoff!<bar>only<cr>
-nnoremap Y y$
-nnoremap / /\v
-nnoremap ? ?\v
-onoremap / /\v
-onoremap ? ?\v
-" Disables Ex mode
-nnoremap Q <nop>
-
-" Rebind uppercase versions of h,l to do 'extreme' movements
-nnoremap H ^
-nnoremap L $
-
-" Sudo save
-cnoremap w!! w !sudo tee %
-
-"}}}
+source ~/.vim/keybinds.vim
 
 " Autocommand (groups) ----------------{{{1
 
