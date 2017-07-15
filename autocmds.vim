@@ -70,6 +70,7 @@ augroup luaaugroup
     autocmd!
     autocmd FileType lua setlocal tabstop=4 noexpandtab shiftwidth=4 softtabstop=4 foldmethod=indent complete=.,w,b,u,i
     autocmd FileType lua setlocal listchars=tab:\|. list
+    " Retab on save
     autocmd BufWritePre *.lua :retab!
 augroup END
 
