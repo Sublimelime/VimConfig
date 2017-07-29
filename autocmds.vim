@@ -90,3 +90,42 @@ augroup htmlaugroup
     autocmd FileType html :setlocal foldmethod=indent
     autocmd FileType html :vnoremap <buffer> <leader>c <esc>`>a--><esc>`<i<!--<esc>
 augroup END
+" Rust {{{1
+
+augroup rustaugroup
+    autocmd!
+    autocmd FileType rust setlocal makeprg=cargo\ build
+    autocmd FileType rust setlocal tabstop=4 expandtab shiftwidth=4 softtabstop=4 foldmethod=syntax
+    autocmd FileType rust setlocal complete=.,w,b,t,u,i nolist suffixesadd=.rs nocindent smarttab
+    autocmd FileType rust silent! setlocal formatoptions+=j
+
+    " Configure errorformat {{{
+    autocmd FileType rust setlocal errorformat=
+                \%f:%l:%c:\ %t%*[^:]:\ %m,
+                \%f:%l:%c:\ %*\\d:%*\\d\ %t%*[^:]:\ %m,
+                \%-G%f:%l\ %s,
+                \%-G%*[\ ]^,
+                \%-G%*[\ ]^%*[~],
+                \%-G%*[\ ]...
+
+    autocmd FileType rust setlocal errorformat+=
+                \%-G,
+                \%-Gerror:\ aborting\ %.%#,
+                \%-Gerror:\ Could\ not\ compile\ %.%#,
+                \%Eerror:\ %m,
+                \%Eerror[E%n]:\ %m,
+                \%Wwarning:\ %m,
+                \%Inote:\ %m,
+                \%C\ %#-->\ %f:%l:%c
+
+    autocmd FileType rust setlocal errorformat+=
+                \%-G%\\s%#Downloading%.%#,
+                \%-G%\\s%#Compiling%.%#,
+                \%-G%\\s%#Finished%.%#,
+                \%-G%\\s%#error:\ Could\ not\ compile\ %.%#,
+                \%-G%\\s%#To\ learn\ more\\,%.%#
+    " }}}
+    autocmd FileType rust setlocal comments=s0:/*!,m:\ ,ex:*/,s1:/*,mb:*,ex:*/,:///,://!,://
+    autocmd FileType rust setlocal commentstring=//%s formatoptions-=t formatoptions+=croqnl
+    autocmd FileType rust inoremap <buffer> {; {<CR><BS>}<Esc>ko
+augroup END

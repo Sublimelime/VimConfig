@@ -96,9 +96,18 @@ function! s:textAbbrevs() " {{{
 endfunc
 " }}}
 
+function! s:rustAbbrevs() " {{{
+    inoreabbrev <buffer> sout println!("{}");<left><left><left>
+    inoreabbrev <buffer> lm let mut
+    inoreabbrev <buffer> refmut &mut
+    inoreabbrev <buffer> fori for i in xxx {<cr>}
+endfunc
+" }}}
+
 augroup abbrevsaugroup
     autocmd!
     autocmd FileType lua :call <SID>luaAbbrevs()
     autocmd FileType mediawiki :call <SID>mediawikiAbbrevs()
     autocmd FileType text,mediawiki,markdown :call <SID>textAbbrevs()
+    autocmd FileType rust :call <SID>rustAbbrevs()
 augroup END

@@ -37,6 +37,7 @@ set viminfo='10,<10,s20,/0,:10
 set dictionary=/usr/share/dict/words
 set complete=.,w,b,u,i
 set nolist listchars=tab:\|.
+set synmaxcol=1000
 
 " Variables/User commands/functions -------------{{{1
 
@@ -146,7 +147,7 @@ source ~/.vim/abbrevs.vim
 
 set mouse=
 set background=dark
-colorscheme srcery
+colorscheme vividchalk
 set guioptions=mai
 set guifont=Terminus\ (TTF)\ Medium\ 9,Monospace\ 9
 

@@ -8,7 +8,7 @@
 :%s/\vVersion: (\d.\d\d.\d\d?)/== \1 ==/
 
 " Change minor headers
-:%s/\v^\s+(Balancing|(Minor|Major) [fF]eatures|Changes|Sound|Circuit [nN]etwork|Modding|Scripting|Bug[fF]ixes):/=== \1 ===/
+:%s/\v^\s+(Balancing|(Minor|Major|Small) [fF]eatures|Changes|Sound|Circuit [nN]etwork|Modding|Scripting|Bug[fF]ixes):/=== \1 ===/
 :%s/\v^\s+(Graphics|Optimi[zs]ations|Configuration|Command line interface):/=== \1 ===/
 
 " Fix bullet points
