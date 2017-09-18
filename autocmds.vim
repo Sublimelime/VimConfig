@@ -95,7 +95,7 @@ augroup END
 augroup rustaugroup
     autocmd!
     autocmd FileType rust setlocal makeprg=cargo\ build
-    autocmd FileType rust setlocal tabstop=4 expandtab shiftwidth=4 softtabstop=4 foldmethod=syntax
+    autocmd FileType rust setlocal tabstop=4 expandtab shiftwidth=4 softtabstop=4 foldmethod=marker
     autocmd FileType rust setlocal complete=.,w,b,t,u,i nolist suffixesadd=.rs nocindent smarttab
     autocmd FileType rust silent! setlocal formatoptions+=j
 

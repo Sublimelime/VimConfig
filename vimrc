@@ -37,7 +37,7 @@ set viminfo='10,<10,s20,/0,:10
 set dictionary=/usr/share/dict/words
 set complete=.,w,b,u,i
 set nolist listchars=tab:\|.
-set synmaxcol=1000
+set synmaxcol=1000 laststatus=2
 
 " Variables/User commands/functions -------------{{{1
 
@@ -87,7 +87,6 @@ command! DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis | wincmd p | d
 " Force quit vim, no matter what
 command! ForceQuit bufdo setlocal nomodified | :q!
 
-
 " Tab completion {{{
 function! s:tabOrComplete()
     if col('.')>1 && strpart( getline('.'), col('.')-2, 3 ) =~ '^\w'
@@ -99,12 +98,21 @@ endfunction
 :inoremap <Tab> <C-R>=<SID>tabOrComplete()<CR>
 " }}}
 
+" Config for :grep command
+if executable("rg") "If ripgrep is installed
+     set grepprg=rg
+     set grepformat=%f:%l:%c:%m,%f:%l:%m
+endif
+
 " Plugin config ------------{{{1
 " Config for autoclose
 let g:AutoClosePairs = {'(': ')', '{': '}', '[': ']', '"': '"'}
 
 " Config for RainbowParentheses
 let g:rainbow_active = 1
+
+" Config for ale
+let g:ale_rust_cargo_use_check = 1
 
 "}}}
 " Keybinds {{{1
@@ -150,12 +158,3 @@ set background=dark
 colorscheme vividchalk
 set guioptions=mai
 set guifont=Terminus\ (TTF)\ Medium\ 9,Monospace\ 9
-
-" Statusline config {{{2
-set laststatus=2
-set statusline=
-set statusline+=\ #%n\ %F%m\ %a%< " Number of buffer, file name, modified flag, argument num
-set statusline+=\ \ <%{mode()}> " Show current mode in statusline
-set statusline+=%=%r\ %h\ %w%{&ff}    " Buffer status info like RO, file format
-set statusline+=%y                " file type in brackets
-set statusline+=\ \ (%l/%L)\ %p%% " Line position
