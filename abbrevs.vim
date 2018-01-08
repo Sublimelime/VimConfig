@@ -68,6 +68,7 @@ function! s:textAbbrevs() " {{{
     inoreabbrev <buffer> reccomended recommended
     inoreabbrev <buffer> recieve receive
     inoreabbrev <buffer> recieved received
+    inoreabbrev <buffer> recieving receiving
     inoreabbrev <buffer> rememver remember
     inoreabbrev <buffer> saturday Saturday
     inoreabbrev <buffer> seperate separate
@@ -93,6 +94,7 @@ function! s:textAbbrevs() " {{{
     inoreabbrev <buffer> ymmv your mileage may vary
     inoreabbrev <buffer> youre you're
     inoreabbrev <buffer> seperated separated
+    inoreabbrev <buffer> consistant consistent
 endfunc
 " }}}
 

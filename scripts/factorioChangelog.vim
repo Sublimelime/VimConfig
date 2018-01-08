@@ -8,8 +8,8 @@
 :%s/\vVersion: (\d.\d\d.\d\d?)/== \1 ==/
 
 " Change minor headers
-:%s/\v^\s+(Balancing|(Minor|Major|Small) [fF]eatures|Changes|Sound|Circuit [nN]etwork|Modding|Scripting|Bug[fF]ixes):/=== \1 ===/
-:%s/\v^\s+(Graphics|Optimi[zs]ations|Configuration|Command line interface):/=== \1 ===/
+:%s/\v^\s+(Balancing|(Minor|Major|Small)? [fF]eatures|Changes|Sounds?|Circuit [nN]etwork|Modding|Scripting|Bug[fF]ixes):/=== \1 ===/
+:%s/\v^\s+(Graphics|Optimi[zs]ations|Configuration|Locale|Command line interface):/=== \1 ===/
 
 " Fix bullet points
 :%s/\v^\s+-/*/
@@ -18,5 +18,10 @@
 :%s/\v\C\n\s+([a-z])/ \1/
 :%s/\v\C^\s+([A-Z])/** \1/
 
-" Fix forum links
-:%s#\v\((https?:\/\/forums.factorio.com\/\d+)\)#([\1 more])#
+" Fix forum/fff links
+:%s#\v\(?(https?:\/\/(www.)?forums.factorio.com\/\d+)\)?#([\1 more])#
+:%s#\v\(?(https?:\/\/(www.)?factorio.com\/blog\/post\/fff-\d+)\)?#([\1 more])#
+
+" Surround code, scripting names, etc with backticks
+:%s#\v(\w+)::(\w+)(\(\))?#<code>&</code>#
+:%s#\v--(\w+-?)+#<code>&</code>#
