@@ -128,7 +128,7 @@ source ~/.vim/autocmds.vim
 augroup misc
     autocmd!
     autocmd FileType vim :setlocal foldmethod=marker
-    autocmd FileType conf :setlocal nowrap
+    autocmd FileType conf :setlocal nowrap foldmethod=marker
     autocmd FileType gitcommit :setlocal nobackup noswapfile
     autocmd FileType help :setlocal nospell
     " Exit insert mode automatically after inactivity
