@@ -22,7 +22,7 @@ set confirm noshowmode title autoread autoindent ruler hidden lazyredraw showmat
 set backup writebackup backupdir=~/.vim/backup,.
 set noundofile
 set swapfile directory=~/.vim/swap,/tmp,.
-set lbr textwidth=0 showcmd scrolloff=1 switchbuf=useopen,usetab cursorline
+set lbr textwidth=0 showcmd scrolloff=1 switchbuf=useopen,usetab nocursorline
 set sessionoptions=sesdir,tabpages,folds,buffers,resize,winsize,winpos
 set timeoutlen=1500 ttimeout ttimeoutlen=1500 timeout updatetime=7000
 set pastetoggle=<F4>
@@ -38,6 +38,7 @@ set dictionary=/usr/share/dict/words
 set complete=.,w,b,u,i
 set nolist listchars=tab:\|.
 set synmaxcol=1000 laststatus=2
+
 
 " Variables/User commands/functions -------------{{{1
 
@@ -114,6 +115,7 @@ let g:rainbow_active = 1
 " Config for ale
 let g:ale_rust_cargo_use_check = 1
 
+
 "}}}
 " Keybinds {{{1
 
@@ -154,7 +156,12 @@ source ~/.vim/abbrevs.vim
 " Graphical Options -------------------{{{1
 
 set mouse=
-set background=dark
-colorscheme vividchalk
+
+" Colorscheme
+set background=light
+set t_Co=256
+let g:solarized_termcolors=256
+colorscheme solarized
+
 set guioptions=mai
 set guifont=Terminus\ (TTF)\ Medium\ 9,Monospace\ 9

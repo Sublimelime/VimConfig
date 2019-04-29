@@ -39,6 +39,7 @@ function! s:textAbbrevs() " {{{
     inoreabbrev <buffer> america America
     inoreabbrev <buffer> api API
     inoreabbrev <buffer> cant can't
+    inoreabbrev <buffer> moreso more so
     inoreabbrev <buffer> suprised surprised
     inoreabbrev <buffer> suprized surprised
     inoreabbrev <buffer> carreer career
