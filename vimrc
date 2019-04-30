@@ -20,7 +20,7 @@ set relativenumber nonumber
 syntax on
 set confirm noshowmode title autoread autoindent ruler hidden lazyredraw showmatch concealcursor=n
 set backup writebackup backupdir=~/.vim/backup,.
-set noundofile
+set noundofile exrc secure
 set swapfile directory=~/.vim/swap,/tmp,.
 set lbr textwidth=0 showcmd scrolloff=1 switchbuf=useopen,usetab nocursorline
 set sessionoptions=sesdir,tabpages,folds,buffers,resize,winsize,winpos
@@ -89,14 +89,15 @@ command! DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis | wincmd p | d
 command! ForceQuit bufdo setlocal nomodified | :q!
 
 " Tab completion {{{
-function! s:tabOrComplete()
-    if col('.')>1 && strpart( getline('.'), col('.')-2, 3 ) =~ '^\w'
-        return "\<C-N>"
-    else
-        return "\<Tab>"
-    endif
-endfunction
-:inoremap <Tab> <C-R>=<SID>tabOrComplete()<CR>
+" Commented out to allow using YCM
+"function! s:tabOrComplete()
+"    if col('.')>1 && strpart( getline('.'), col('.')-2, 3 ) =~ '^\w'
+"        return "\<C-N>"
+"    else
+"        return "\<Tab>"
+"    endif
+"endfunction
+":inoremap <Tab> <C-R>=<SID>tabOrComplete()<CR>
 " }}}
 
 " Config for :grep command
@@ -116,6 +117,21 @@ let g:rainbow_conf = {
 
 " Config for ale
 let g:ale_rust_cargo_use_check = 1
+
+" Config for YCM
+" Blacklist certain filetypes from activating ycm
+let g:ycm_filetype_blacklist = {
+      \ 'tagbar': 1,
+      \ 'netrw': 1,
+      \ 'unite': 1,
+      \ 'vimwiki': 1,
+      \ 'pandoc': 1,
+      \ 'infolog': 1,
+      \ 'mail': 1
+      \}
+let g:ycm_complete_in_comments = 1 " Assists in writing comments
+let g:ycm_autoclose_preview_window_after_insertion = 1
+
 
 "}}}
 " Keybinds {{{1
@@ -164,7 +180,6 @@ if exists('+termguicolors')
   let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
   set termguicolors
 endif
-"let g:solarized_termcolors=256
 colorscheme lucius
 
 set guioptions=mai
