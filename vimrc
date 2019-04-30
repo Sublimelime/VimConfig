@@ -37,7 +37,7 @@ set viminfo='10,<10,s20,/0,:10
 set dictionary=/usr/share/dict/words
 set complete=.,w,b,u,i
 set nolist listchars=tab:\|.
-set synmaxcol=1000 laststatus=2
+set synmaxcol=1000 laststatus=2 diffopt+=iwhiteall
 
 
 " Variables/User commands/functions -------------{{{1
@@ -101,20 +101,21 @@ endfunction
 
 " Config for :grep command
 if executable("rg") "If ripgrep is installed
-     set grepprg=rg
-     set grepformat=%f:%l:%c:%m,%f:%l:%m
+    set grepprg=rg
+    set grepformat=%f:%l:%c:%m,%f:%l:%m
 endif
 
 " Plugin config ------------{{{1
 " Config for autoclose
-let g:AutoClosePairs = {'(': ')', '{': '}', '[': ']', '"': '"'}
+let g:AutoPairs = {'(': ')', '`':'`', '{': '}', '[': ']', '"': '"'}
 
 " Config for RainbowParentheses
 let g:rainbow_active = 1
+let g:rainbow_conf = {
+            \	'ctermfgs': ['black', 'darkred', 'blue', 'darkmagenta', 'green']}
 
 " Config for ale
 let g:ale_rust_cargo_use_check = 1
-
 
 "}}}
 " Keybinds {{{1
@@ -155,13 +156,17 @@ source ~/.vim/abbrevs.vim
 
 " Graphical Options -------------------{{{1
 
-set mouse=
-
 " Colorscheme
 set background=light
-set t_Co=256
-let g:solarized_termcolors=256
-colorscheme solarized
+" Enable fancy 24 bit color support if possible
+if exists('+termguicolors')
+  let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors
+endif
+"let g:solarized_termcolors=256
+colorscheme lucius
 
 set guioptions=mai
 set guifont=Terminus\ (TTF)\ Medium\ 9,Monospace\ 9
+set mouse=

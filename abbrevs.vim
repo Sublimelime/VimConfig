@@ -36,13 +36,12 @@ endfunc
 " }}}
 
 function! s:textAbbrevs() " {{{
+    inoreabbrev <buffer> alot a lot
     inoreabbrev <buffer> america America
     inoreabbrev <buffer> api API
     inoreabbrev <buffer> cant can't
-    inoreabbrev <buffer> moreso more so
-    inoreabbrev <buffer> suprised surprised
-    inoreabbrev <buffer> suprized surprised
     inoreabbrev <buffer> carreer career
+    inoreabbrev <buffer> consistant consistent
     inoreabbrev <buffer> didnt didn't
     inoreabbrev <buffer> dont don't
     inoreabbrev <buffer> eachother each other
@@ -61,6 +60,9 @@ function! s:textAbbrevs() " {{{
     inoreabbrev <buffer> licence license
     inoreabbrev <buffer> maintenence maintenance
     inoreabbrev <buffer> monday Monday
+    inoreabbrev <buffer> moreso more so
+    inoreabbrev <buffer> mustle muscle
+    inoreabbrev <buffer> mustles muscles
     inoreabbrev <buffer> neccesary necessary
     inoreabbrev <buffer> neccessary necessary
     inoreabbrev <buffer> noah Noah
@@ -75,8 +77,11 @@ function! s:textAbbrevs() " {{{
     inoreabbrev <buffer> rememver remember
     inoreabbrev <buffer> saturday Saturday
     inoreabbrev <buffer> seperate separate
+    inoreabbrev <buffer> seperated separated
     inoreabbrev <buffer> sophmore sophomore
     inoreabbrev <buffer> sunday Sunday
+    inoreabbrev <buffer> suprised surprised
+    inoreabbrev <buffer> suprized surprised
     inoreabbrev <buffer> teh the
     inoreabbrev <buffer> tf2 Team Fortress 2
     inoreabbrev <buffer> tge the
@@ -96,8 +101,6 @@ function! s:textAbbrevs() " {{{
     inoreabbrev <buffer> wouldve would've
     inoreabbrev <buffer> ymmv your mileage may vary
     inoreabbrev <buffer> youre you're
-    inoreabbrev <buffer> seperated separated
-    inoreabbrev <buffer> consistant consistent
 endfunc
 " }}}
 
