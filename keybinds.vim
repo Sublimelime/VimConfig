@@ -1,6 +1,4 @@
 " Normal mode {{{1
-" Command to toggle spell checking
-nnoremap <F10> <Esc>:setlocal spell!<cr>
 
 " View word count
 nnoremap <leader>wc g<C-g>
@@ -31,13 +29,12 @@ nnoremap <space> :nohl<cr>
 nnoremap <leader>i mzgg=G`z
 
 " Quick switch buffer
-nnoremap <leader>b :ls<CR>:buf<Space>
-
-" Toggle list mode
-nnoremap <leader>l :setlocal list!<cr>
+nnoremap gb :ls<CR>:buf<Space>
 
 " Copy text left of cursor and start new line
 nnoremap <leader>o v^yo<C-r>"
+
+" Copy current buffer to clipboard and exit vim
 
 " Insert mode {{{1
 " Jump back and fix most recent error

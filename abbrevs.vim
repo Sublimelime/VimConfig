@@ -37,6 +37,8 @@ endfunc
 
 function! s:textAbbrevs() " {{{
     inoreabbrev <buffer> alot a lot
+    inoreabbrev <buffer> oppertunities opportunities
+    inoreabbrev <buffer> oppertunity opportunity
     inoreabbrev <buffer> america America
     inoreabbrev <buffer> api API
     inoreabbrev <buffer> cant can't

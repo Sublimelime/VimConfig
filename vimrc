@@ -150,8 +150,6 @@ augroup misc
     autocmd FileType conf :setlocal nowrap foldmethod=marker
     autocmd FileType gitcommit :setlocal nobackup noswapfile
     autocmd FileType help :setlocal nospell
-    " Exit insert mode automatically after inactivity
-    autocmd CursorHoldI * :stopinsert
     autocmd CursorHold * :nohls
     " Clean buffer on save
     autocmd BufWritePre * :StripWhitespace
