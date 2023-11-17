@@ -3,23 +3,12 @@
 " Global Options -------------------{{{1
 set nocompatible
 
-" Create missing directories, if any {{{2
-if !isdirectory($HOME.'/.vim/swap')
-    silent call mkdir($HOME.'/.vim/swap','p')
-endif
-if !isdirectory($HOME.'/.vim/backup')
-    silent call mkdir($HOME.'/.vim/backup','p')
-endif
-if !isdirectory($HOME.'/.vim/sessions')
-    silent call mkdir($HOME.'/.vim/sessions', 'p')
-endif
-
 " General options {{{2
 filetype indent plugin on
 set relativenumber nonumber
 syntax on
 set confirm noshowmode title autoread autoindent ruler hidden lazyredraw showmatch concealcursor=n
-set backup writebackup backupdir=~/.vim/backup,.
+set nobackup
 set noundofile exrc secure
 set swapfile directory=~/.vim/swap,/tmp,.
 set lbr textwidth=0 showcmd scrolloff=1 switchbuf=useopen,usetab nocursorline
@@ -38,7 +27,6 @@ set dictionary=/usr/share/dict/words
 set complete=.,w,b,u,i
 set nolist listchars=tab:\|.
 set synmaxcol=1000 laststatus=2 diffopt+=iwhiteall
-
 
 " Variables/User commands/functions -------------{{{1
 
@@ -88,18 +76,6 @@ command! DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis | wincmd p | d
 " Force quit vim, no matter what
 command! ForceQuit bufdo setlocal nomodified | :q!
 
-" Tab completion {{{
-" Commented out to allow using YCM
-"function! s:tabOrComplete()
-"    if col('.')>1 && strpart( getline('.'), col('.')-2, 3 ) =~ '^\w'
-"        return "\<C-N>"
-"    else
-"        return "\<Tab>"
-"    endif
-"endfunction
-":inoremap <Tab> <C-R>=<SID>tabOrComplete()<CR>
-" }}}
-
 " Config for :grep command
 if executable("rg") "If ripgrep is installed
     set grepprg=rg
@@ -107,41 +83,17 @@ if executable("rg") "If ripgrep is installed
 endif
 
 " Plugin config ------------{{{1
-" Config for autoclose
-let g:AutoPairs = {'(': ')', '`':'`', '{': '}', '[': ']', '"': '"'}
-
-" Config for RainbowParentheses
-let g:rainbow_active = 1
-let g:rainbow_conf = {
-            \	'ctermfgs': ['black', 'darkred', 'blue', 'darkmagenta', 'green']}
-
-" Config for ale
-let g:ale_rust_cargo_use_check = 1
-
-" Config for YCM
-" Blacklist certain filetypes from activating ycm
-let g:ycm_filetype_blacklist = {
-      \ 'tagbar': 1,
-      \ 'netrw': 1,
-      \ 'unite': 1,
-      \ 'vimwiki': 1,
-      \ 'pandoc': 1,
-      \ 'infolog': 1,
-      \ 'mail': 1
-      \}
-let g:ycm_complete_in_comments = 1 " Assists in writing comments
-let g:ycm_autoclose_preview_window_after_insertion = 1
 
 
 "}}}
 " Keybinds {{{1
 
-source ~/.vim/keybinds.vim
+source ~/.config/nvim/keybinds.vim
 
 " Autocommand (groups) ----------------{{{1
 
 " Source the autocmd file
-source ~/.vim/autocmds.vim
+source ~/.config/nvim/autocmds.vim
 
 " Misc filetypes/autocmds not worth dedicating a group to. {{{2
 augroup misc
@@ -166,20 +118,6 @@ augroup END
 
 " Abbriviations ---------------{{{1
 
-source ~/.vim/abbrevs.vim
+source ~/.config/nvim/abbrevs.vim
 
 " Graphical Options -------------------{{{1
-
-" Colorscheme
-set background=light
-" Enable fancy 24 bit color support if possible
-if exists('+termguicolors')
-  let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
-  let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
-  set termguicolors
-endif
-colorscheme lucius
-
-set guioptions=mai
-set guifont=Terminus\ (TTF)\ Medium\ 9,Monospace\ 9
-set mouse=
