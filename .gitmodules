@@ -1,0 +1,6 @@
+[submodule "pack/colorschemes/opt/everforest"]
+	path = pack/colorschemes/opt/everforest
+	url = git@github.com:sainnhe/everforest.git
+[submodule "pack/plugins/start/lualine"]
+	path = pack/plugins/start/lualine
+	url = git@github.com:nvim-lualine/lualine.nvim.git
