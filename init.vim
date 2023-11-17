@@ -3,6 +3,14 @@
 " Global Options -------------------{{{1
 set nocompatible
 
+if !exists("g:os")
+    if has("win64") || has("win32") || has("win16")
+        let g:os = "Windows"
+    else
+        let g:os = substitute(system('uname'), '\n', '', '')
+    endif
+endif
+
 " General options
 filetype indent plugin on
 set relativenumber nonumber
@@ -10,7 +18,7 @@ syntax on
 set confirm noshowmode title autoread autoindent ruler hidden lazyredraw showmatch concealcursor=n
 set nobackup
 set noundofile exrc secure
-set swapfile directory=~/.vim/swap,/tmp,.
+set noswapfile
 set lbr textwidth=0 showcmd scrolloff=1 switchbuf=useopen,usetab nocursorline
 set sessionoptions=sesdir,tabpages,folds,buffers,resize,winsize,winpos
 set timeoutlen=1500 ttimeout ttimeoutlen=1500 timeout updatetime=7000
@@ -96,13 +104,20 @@ END
 
 "}}}
 " Keybinds {{{1
-
-source ~/.config/nvim/keybinds.vim
+if g:os == "Windows"
+    source $HOME\AppData\Local\nvim\keybinds.vim
+else
+    source ~/.config/nvim/keybinds.vim
+endif
 
 " Autocommand (groups) ----------------{{{1
 
 " Source the autocmd file
-source ~/.config/nvim/autocmds.vim
+if g:os == "Windows"
+    source $HOME\AppData\Local\nvim\autocmds.vim
+else
+    source ~/.config/nvim/autocmds.vim
+endif
 
 " Misc filetypes/autocmds not worth dedicating a group to. {{{2
 augroup misc
@@ -127,7 +142,11 @@ augroup END
 
 " Abbriviations ---------------{{{1
 
-source ~/.config/nvim/abbrevs.vim
+if g:os == "Windows"
+    source $HOME\AppData\Local\nvim\abbrevs.vim
+else
+    source ~/.config/nvim/abbrevs.vim
+endif
 
 " Graphical Options -------------------{{{1
 
