@@ -36,50 +36,81 @@ endfunc
 " }}}
 
 function! s:textAbbrevs() " {{{
-    inoreabbrev <buffer> alot a lot
-    inoreabbrev <buffer> oppertunities opportunities
-    inoreabbrev <buffer> oppertunity opportunity
+    inoreabbrev <buffer> acessed accessed
     inoreabbrev <buffer> america America
     inoreabbrev <buffer> api API
+    inoreabbrev <buffer> appriciated appreciated
+    inoreabbrev <buffer> bernoulli Bernoulli
+    inoreabbrev <buffer> canada Canada
     inoreabbrev <buffer> cant can't
     inoreabbrev <buffer> carreer career
+    inoreabbrev <buffer> celcius Celsius
+    inoreabbrev <buffer> centripedal centripetal
     inoreabbrev <buffer> consistant consistent
+    inoreabbrev <buffer> continous continuous
+    inoreabbrev <buffer> darwin Darwin
+    inoreabbrev <buffer> dependant dependent
     inoreabbrev <buffer> didnt didn't
+    inoreabbrev <buffer> disterbance disturbance
+    inoreabbrev <buffer> disterbence disturbance
     inoreabbrev <buffer> dont don't
     inoreabbrev <buffer> eachother each other
     inoreabbrev <buffer> english English
     inoreabbrev <buffer> friday Friday
     inoreabbrev <buffer> german German
     inoreabbrev <buffer> goverment government
+    inoreabbrev <buffer> grey gray
+    inoreabbrev <buffer> greyscale grayscale
+    inoreabbrev <buffer> gurantee guarantee
+    inoreabbrev <buffer> gurantees guarantees
     inoreabbrev <buffer> havent havent
     inoreabbrev <buffer> hes he's
     inoreabbrev <buffer> i I
     inoreabbrev <buffer> idk I don't know
     inoreabbrev <buffer> im I'm
+    inoreabbrev <buffer> independant independent
     inoreabbrev <buffer> isnt isn't
+    inoreabbrev <buffer> isostacy isostasy
     inoreabbrev <buffer> ive I've
     inoreabbrev <buffer> iwth with
+    inoreabbrev <buffer> judgement judgment
+    inoreabbrev <buffer> jurassic Jurassic
     inoreabbrev <buffer> licence license
     inoreabbrev <buffer> maintenence maintenance
+    inoreabbrev <buffer> maximising maximizing
     inoreabbrev <buffer> monday Monday
-    inoreabbrev <buffer> moreso more so
-    inoreabbrev <buffer> mustle muscle
-    inoreabbrev <buffer> mustles muscles
     inoreabbrev <buffer> neccesary necessary
     inoreabbrev <buffer> neccessary necessary
     inoreabbrev <buffer> noah Noah
     inoreabbrev <buffer> noticeible noticeable
     inoreabbrev <buffer> occor occur
+    inoreabbrev <buffer> occored occurred
     inoreabbrev <buffer> occorring occurring
+    inoreabbrev <buffer> occured occurred
+    inoreabbrev <buffer> occurence occurrence
+    inoreabbrev <buffer> occuring occurring
+    inoreabbrev <buffer> oppertunities opportunities
+    inoreabbrev <buffer> oppertunity opportunity
+    inoreabbrev <buffer> optimise optimize
     inoreabbrev <buffer> paralell parallel
+    inoreabbrev <buffer> percieve perceive
+    inoreabbrev <buffer> personell personnel
+    inoreabbrev <buffer> probablity probability
+    inoreabbrev <buffer> protien protein
+    inoreabbrev <buffer> protiens proteins
     inoreabbrev <buffer> reccomended recommended
     inoreabbrev <buffer> recieve receive
     inoreabbrev <buffer> recieved received
     inoreabbrev <buffer> recieving receiving
     inoreabbrev <buffer> rememver remember
+    inoreabbrev <buffer> sattelite satellite
+    inoreabbrev <buffer> sattellite satellite
     inoreabbrev <buffer> saturday Saturday
     inoreabbrev <buffer> seperate separate
     inoreabbrev <buffer> seperated separated
+    inoreabbrev <buffer> seperating separating
+    inoreabbrev <buffer> seperation separation
+    inoreabbrev <buffer> sofware software
     inoreabbrev <buffer> sophmore sophomore
     inoreabbrev <buffer> sunday Sunday
     inoreabbrev <buffer> suprised surprised
@@ -92,17 +123,19 @@ function! s:textAbbrevs() " {{{
     inoreabbrev <buffer> theyre theyre
     inoreabbrev <buffer> thier their
     inoreabbrev <buffer> thursday Thursday
-    inoreabbrev <buffer> tm &trade;
+    inoreabbrev <buffer> troph trough
     inoreabbrev <buffer> tset test
     inoreabbrev <buffer> tuesday Tuesday
     inoreabbrev <buffer> unlicence unlicense
+    inoreabbrev <buffer> varience variance
+    inoreabbrev <buffer> wasnt wasn't
     inoreabbrev <buffer> wednesday Wednesday
     inoreabbrev <buffer> weve we've
     inoreabbrev <buffer> wiki Wiki
     inoreabbrev <buffer> wont won't
     inoreabbrev <buffer> wouldve would've
-    inoreabbrev <buffer> ymmv your mileage may vary
     inoreabbrev <buffer> youre you're
+
 endfunc
 " }}}
 

@@ -17,10 +17,10 @@ nnoremap <silent> <leader>sy :call <sid>ToggleSyntax()<CR>
 " Quickly edit/source .vimrc file, keybinds, and abbrevs file
 nnoremap <leader>evf :15split $MYVIMRC<CR>
 nnoremap <leader>svf :source $MYVIMRC<CR>
-nnoremap <leader>eaf :15split ~/.vim/abbrevs.vim<cr>
-nnoremap <leader>saf :source ~/.vim/abbrevs.vim<cr>
-nnoremap <leader>ekf :15split ~/.vim/keybinds.vim<cr>
-nnoremap <leader>skf :source ~/.vim/keybinds.vim<cr>
+nnoremap <leader>eaf :15split ~/.config/nvim/abbrevs.vim<cr>
+nnoremap <leader>saf :source ~/.config/nvim/abbrevs.vim<cr>
+nnoremap <leader>ekf :15split ~/.config/nvim/keybinds.vim<cr>
+nnoremap <leader>skf :source ~/.config/nvim/keybinds.vim<cr>
 
 " Quickly turn off search highlighting
 nnoremap <space> :nohl<cr>

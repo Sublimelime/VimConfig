@@ -3,7 +3,7 @@
 " Global Options -------------------{{{1
 set nocompatible
 
-" General options {{{2
+" General options
 filetype indent plugin on
 set relativenumber nonumber
 syntax on
@@ -14,7 +14,6 @@ set swapfile directory=~/.vim/swap,/tmp,.
 set lbr textwidth=0 showcmd scrolloff=1 switchbuf=useopen,usetab nocursorline
 set sessionoptions=sesdir,tabpages,folds,buffers,resize,winsize,winpos
 set timeoutlen=1500 ttimeout ttimeoutlen=1500 timeout updatetime=7000
-set pastetoggle=<F4>
 set path+=** "Search down into subdirs
 set foldcolumn=1 foldmethod=manual foldlevelstart=0 foldnestmax=7
 set nomodeline modelines=1
@@ -84,6 +83,16 @@ endif
 
 " Plugin config ------------{{{1
 
+" Lualine
+:lua << END
+require'lualine'.setup {
+    options = {
+        theme = 'everforest',
+        icons_enabled = false
+    }
+}
+END
+
 
 "}}}
 " Keybinds {{{1
@@ -121,3 +130,13 @@ augroup END
 source ~/.config/nvim/abbrevs.vim
 
 " Graphical Options -------------------{{{1
+
+" Colorscheme
+packadd! everforest
+if has('termguicolors')
+    set termguicolors
+endif
+set background=light
+let g:everforest_background = 'soft'
+let g:everforest_better_performance = 1
+colorscheme everforest
