@@ -107,7 +107,11 @@ if g:os != "Windows"
 endif
 
 " Autopairs
-source ~/.config/nvim/autopairsConfig.lua
+if g:os == "Windows"
+    source $HOME\AppData\Local\nvim\autopairsConfig.lua
+else
+    source ~/.config/nvim/autopairsConfig.lua
+endif
 
 " LSP config
 if g:os != "Windows"
