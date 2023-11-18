@@ -136,7 +136,4 @@ augroup pythonaugroup
     autocmd!
     autocmd FileType python setlocal tabstop=4 softtabstop=4 shiftwidth=4 textwidth=79
     autocmd FileType python setlocal expandtab autoindent fileformat=unix
-    autocmd FileType python nnoremap <buffer> <F9> :w <bar> :exec '!clear && python3' shellescape(@%, 1)<cr>
-    autocmd FileType python echo "Python Autocmd enabled. Presss F9 to run."
-
 augroup END

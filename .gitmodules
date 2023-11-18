@@ -4,3 +4,18 @@
 [submodule "pack/plugins/start/lualine"]
 	path = pack/plugins/start/lualine
 	url = git@github.com:nvim-lualine/lualine.nvim.git
+[submodule "pack/plugins/start/treesitter"]
+	path = pack/plugins/start/treesitter
+	url = git@github.com:nvim-treesitter/nvim-treesitter.git
+[submodule "pack/plugins/start/nvim-lspconfig"]
+	path = pack/plugins/start/nvim-lspconfig
+	url = git@github.com:neovim/nvim-lspconfig.git
+[submodule "pack/plugins/start/coq-nvim"]
+	path = pack/plugins/start/coq-nvim
+	url = git@github.com:ms-jpq/coq_nvim.git
+[submodule "pack/plugins/start/nvim-autopairs"]
+	path = pack/plugins/start/nvim-autopairs
+	url = git@github.com:windwp/nvim-autopairs.git
+[submodule "pack/plugins/start/coq.artifacts"]
+	path = pack/plugins/start/coq.artifacts
+	url = git@github.com:ms-jpq/coq.artifacts.git

@@ -52,7 +52,7 @@ function! s:search_open_files(pattern)
         echomsg "No match found."
     endtry
     bo cwindow
-endf
+endfunction
 command! -nargs=1 SearchOpen call <sid>search_open_files(<q-args>)
 "}}}
 
@@ -98,9 +98,23 @@ require'lualine'.setup {
         theme = 'everforest',
         icons_enabled = false
     }
-}
+    }
 END
 
+" Treesitter
+if g:os != "Windows"
+    source ~/.config/nvim/treesitterConfig.lua
+endif
+
+" Autopairs
+source ~/.config/nvim/autopairsConfig.lua
+
+" LSP config
+if g:os != "Windows"
+    packadd! nvim-lspconfig
+    let g:coq_settings = { 'auto_start': 'shut-up' }
+    source ~/.config/nvim/lspconfigConfig.lua
+endif
 
 "}}}
 " Keybinds {{{1
