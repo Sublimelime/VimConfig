@@ -34,8 +34,6 @@ nnoremap gb :ls<CR>:buf<Space>
 " Copy text left of cursor and start new line
 nnoremap <leader>o v^yo<C-r>"
 
-" Copy current buffer to clipboard and exit vim
-
 " Insert mode {{{1
 " Jump back and fix most recent error
 inoremap <C-s> <esc>[sz=

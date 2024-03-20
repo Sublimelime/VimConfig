@@ -1,6 +1,7 @@
 -- Setup language servers.
 local lspconfig = require('lspconfig')
-lspconfig.pyright.setup {}
+lspconfig.pyright.setup {} -- python
+lspconfig.clangd.setup{} -- c++
 
 -- Use LspAttach autocommand to only map the following keys
 -- after the language server attaches to the current buffer

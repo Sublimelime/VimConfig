@@ -134,6 +134,6 @@ augroup END
 
 augroup pythonaugroup
     autocmd!
-    autocmd FileType python setlocal tabstop=4 softtabstop=4 shiftwidth=4 textwidth=79
-    autocmd FileType python setlocal expandtab autoindent fileformat=unix
+    autocmd FileType python setlocal tabstop=4 softtabstop=4 shiftwidth=4 textwidth=0
+    autocmd FileType python setlocal expandtab autoindent fileformat=unix foldmethod=indent
 augroup END
