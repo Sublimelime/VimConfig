@@ -120,6 +120,10 @@ if g:os != "Windows"
     source ~/.config/nvim/lspconfigConfig.lua
 endif
 
+" Easy align
+xnoremap ga <Plug>(EasyAlign)
+nnoremap ga <Plug>(EasyAlign)
+
 "}}}
 " Keybinds {{{1
 if g:os == "Windows"

@@ -19,3 +19,6 @@
 [submodule "pack/plugins/start/coq.artifacts"]
 	path = pack/plugins/start/coq.artifacts
 	url = git@github.com:ms-jpq/coq.artifacts.git
+[submodule "pack/plugins/start/vim-easy-align"]
+	path = pack/plugins/start/vim-easy-align
+	url = git@github.com:junegunn/vim-easy-align.git
