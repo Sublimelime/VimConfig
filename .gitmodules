@@ -22,3 +22,15 @@
 [submodule "pack/plugins/start/vim-easy-align"]
 	path = pack/plugins/start/vim-easy-align
 	url = git@github.com:junegunn/vim-easy-align.git
+[submodule "pack/plugins/start/nvim-web-devicons"]
+	path = pack/plugins/start/nvim-web-devicons
+	url = git@github.com:nvim-tree/nvim-web-devicons.git
+[submodule "pack/plugins/start/neo-tree.nvim"]
+	path = pack/plugins/start/neo-tree.nvim
+	url = git@github.com:nvim-neo-tree/neo-tree.nvim.git
+[submodule "pack/plugins/start/plenary.nvim"]
+	path = pack/plugins/start/plenary.nvim
+	url = git@github.com:nvim-lua/plenary.nvim.git
+[submodule "pack/plugins/start/nui.nvim"]
+	path = pack/plugins/start/nui.nvim
+	url = git@github.com:MunifTanjim/nui.nvim.git

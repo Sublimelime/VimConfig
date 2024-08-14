@@ -91,13 +91,26 @@ endif
 
 " Plugin config ------------{{{1
 
-" Lualine
+" Lualine ----
+
 :lua << END
 require'lualine'.setup {
     options = {
         theme = 'everforest',
-        icons_enabled = false
-    }
+        icons_enabled = true,
+        globalstatus = true
+    },
+    sections = {
+        -- [abc]defghijklmnopqrstuvw[xyz]
+        -- [] are used already
+        lualine_w = {
+            {
+                    'searchcount',
+                    maxcount = 500,
+                    timeout = 500,
+            }
+            }
+        }
     }
 END
 
@@ -124,6 +137,11 @@ endif
 xnoremap ga <Plug>(EasyAlign)
 nnoremap ga <Plug>(EasyAlign)
 
+" Neotree
+source ~/.config/nvim/neotreeConfig.lua
+nnoremap <leader>n :Neotree filesystem reveal left toggle<cr>
+nnoremap <leader>b :Neotree buffers left toggle<cr>
+
 "}}}
 " Keybinds {{{1
 if g:os == "Windows"
@@ -144,13 +162,13 @@ endif
 " Misc filetypes/autocmds not worth dedicating a group to. {{{2
 augroup misc
     autocmd!
-    autocmd FileType vim :setlocal foldmethod=marker
-    autocmd FileType conf :setlocal nowrap foldmethod=marker
+    autocmd FileType vim       :setlocal foldmethod=marker
+    autocmd FileType conf      :setlocal nowrap foldmethod=marker
     autocmd FileType gitcommit :setlocal nobackup noswapfile
-    autocmd FileType help :setlocal nospell
-    autocmd CursorHold * :nohls
+    autocmd FileType help      :setlocal nospell
+    autocmd CursorHold *       :nohls
     " Clean buffer on save
-    autocmd BufWritePre * :StripWhitespace
+    autocmd BufWritePre *      :StripWhitespace
 augroup END
 
 " Toggle type of number display between modes {{{2
