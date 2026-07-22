@@ -89,60 +89,7 @@ if executable("rg") "If ripgrep is installed
     set grepformat=%f:%l:%c:%m,%f:%l:%m
 endif
 
-" Plugin config ------------{{{1
 
-" Lualine ----
-
-:lua << END
-require'lualine'.setup {
-    options = {
-        theme = 'everforest',
-        icons_enabled = true,
-        globalstatus = true
-    },
-    sections = {
-        -- [abc]defghijklmnopqrstuvw[xyz]
-        -- [] are used already
-        lualine_w = {
-            {
-                    'searchcount',
-                    maxcount = 500,
-                    timeout = 500,
-            }
-            }
-        }
-    }
-END
-
-" Treesitter
-if g:os != "Windows"
-    source ~/.config/nvim/treesitterConfig.lua
-endif
-
-" Autopairs
-if g:os == "Windows"
-    source $HOME\AppData\Local\nvim\autopairsConfig.lua
-else
-    source ~/.config/nvim/autopairsConfig.lua
-endif
-
-" LSP config
-if g:os != "Windows"
-    packadd! nvim-lspconfig
-    let g:coq_settings = { 'auto_start': 'shut-up' }
-    source ~/.config/nvim/lspconfigConfig.lua
-endif
-
-" Easy align
-xnoremap ga <Plug>(EasyAlign)
-nnoremap ga <Plug>(EasyAlign)
-
-" Neotree
-source ~/.config/nvim/neotreeConfig.lua
-nnoremap <leader>n :Neotree filesystem reveal left toggle<cr>
-nnoremap <leader>b :Neotree buffers left toggle<cr>
-
-"}}}
 " Keybinds {{{1
 if g:os == "Windows"
     source $HOME\AppData\Local\nvim\keybinds.vim
@@ -188,14 +135,4 @@ else
     source ~/.config/nvim/abbrevs.vim
 endif
 
-" Graphical Options -------------------{{{1
 
-" Colorscheme
-packadd! everforest
-if has('termguicolors')
-    set termguicolors
-endif
-set background=light
-let g:everforest_background = 'soft'
-let g:everforest_better_performance = 1
-colorscheme everforest
