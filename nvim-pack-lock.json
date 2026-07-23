@@ -28,6 +28,10 @@
     "VenvSelector": {
       "rev": "cc4bb3975de8835291f9bb45889e96c6b2795fc4",
       "src": "https://github.com/linux-cultist/venv-selector.nvim"
+    },
+    "nvim-lspconfig": {
+      "rev": "d592c1e6ad9a0a01b3d5ed3f0345d68407167181",
+      "src": "https://github.com/neovim/nvim-lspconfig"
     }
   }
 }

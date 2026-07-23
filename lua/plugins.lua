@@ -9,6 +9,7 @@ vim.pack.add({
   { src = 'https://github.com/nvim-telescope/telescope.nvim', name = 'Telescope' },
   { src = 'https://github.com/linux-cultist/venv-selector.nvim', name = 'VenvSelector' },
   { src = 'https://github.com/nvim-mini/mini.align', version = 'stable', name = "MiniAlign" },
+  { src = 'https://github.com/neovim/nvim-lspconfig' },
 })
 
 
@@ -46,3 +47,35 @@ vim.keymap.set('n', '<leader>fb', tele.buffers, { desc = 'Telescope buffers' })
 vim.keymap.set('n', '<leader>fh', tele.help_tags, { desc = 'Telescope help tags' })
 
 require('venv-selector').setup()
+
+local npm_root = vim.fn.trim(vim.fn.system("npm root -g"))
+vim.lsp.config("vue_ls", {
+    init_options = {
+        typescript = {
+            tsdk = npm_root .. "/typescript/lib",
+        },
+    },
+})
+
+local vue_plugin = {
+  name = '@vue/typescript-plugin',
+  location = npm_root .. '/@vue/language-server',
+  languages = { 'vue' },
+  configNamespace = 'typescript',
+}
+vim.lsp.config('vtsls', {
+  settings = {
+    vtsls = {
+      tsserver = {
+        globalPlugins = {
+          vue_plugin,
+        },
+      },
+    },
+  },
+  filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
+})
+
+vim.lsp.enable("vtsls")
+vim.lsp.enable('vue_ls')
+vim.lsp.enable('pyright')
