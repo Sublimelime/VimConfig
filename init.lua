@@ -54,9 +54,9 @@ opt.timeout = true
 opt.updatetime = 700
 opt.path:append("**")
 opt.foldcolumn = "1"
-opt.foldmethod = "manual"
-opt.foldlevelstart = 0
-opt.foldnestmax = 7
+opt.foldmethod = "indent"
+opt.foldlevelstart = 99
+opt.foldnestmax = 5
 opt.modeline = false
 opt.modelines = 1
 opt.tabstop = 4
@@ -81,6 +81,7 @@ opt.laststatus = 2
 opt.diffopt:append("iwhiteall")
 vim.g.mapleader = "-"
 vim.g.maplocalleader = "\\"
+opt.background = "dark"
 
 -- Fix nvim terminal when running in powershell
 if vim.g.os == "Windows" then
@@ -101,6 +102,7 @@ end
 -- Neovide config options
 if vim.g.neovide then
     vim.o.guifont = "Cascadia Mono:h10"
+    vim.g.neovide_theme = 'dark'
 end
 
 
@@ -156,7 +158,6 @@ end, { nargs = 1 })
 --------------------------------------------------
 
 local function strip_whitespace()
-
     local search = vim.fn.getreg("/")
     local pos = vim.api.nvim_win_get_cursor(0)
 
