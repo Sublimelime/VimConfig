@@ -51,7 +51,7 @@ opt.timeoutlen = 1500
 opt.ttimeout = true
 opt.ttimeoutlen = 1500
 opt.timeout = true
-opt.updatetime = 7000
+opt.updatetime = 700
 opt.path:append("**")
 opt.foldcolumn = "1"
 opt.foldmethod = "manual"
@@ -238,15 +238,30 @@ vim.api.nvim_create_autocmd("FileType", {
     command = "setlocal nospell",
 })
 
-vim.api.nvim_create_autocmd("CursorHold", {
-    group = misc,
-    pattern = "*",
-    command = "nohlsearch",
-})
-
 vim.api.nvim_create_autocmd("BufWritePre", {
     group = misc,
     callback = strip_whitespace,
+})
+
+-- Diagnostics on cursor pause
+local diagnostic_group = vim.api.nvim_create_augroup("diagnostic_hover", { clear = true })
+vim.api.nvim_create_autocmd("CursorHold", {
+    group = diagnostic_group,
+    callback = function()
+        vim.diagnostic.open_float(nil, {
+            focusable = false,
+            close_events = {
+                "BufLeave",
+                "CursorMoved",
+                "InsertEnter",
+                "FocusLost",
+            },
+            border = "rounded",
+            source = "if_many",
+            prefix = "",
+            scope = "cursor",
+        })
+    end,
 })
 
 --------------------------------------------------

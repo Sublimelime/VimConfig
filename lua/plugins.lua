@@ -8,8 +8,8 @@ vim.pack.add({
   { src = 'https://github.com/nvim-lua/plenary.nvim', name = 'Plenary' },
   { src = 'https://github.com/nvim-telescope/telescope.nvim', name = 'Telescope' },
   { src = 'https://github.com/linux-cultist/venv-selector.nvim', name = 'VenvSelector' },
+  { src = 'https://github.com/neovim/nvim-lspconfig', name = "LSPConfig"},
   { src = 'https://github.com/nvim-mini/mini.align', version = 'stable', name = "MiniAlign" },
-  { src = 'https://github.com/neovim/nvim-lspconfig' },
 })
 
 
@@ -37,6 +37,7 @@ require('lualine').setup {
 }
 
 require('mini.align').setup()
+
 
 require('telescope').setup()
 local tele = require('telescope.builtin')
