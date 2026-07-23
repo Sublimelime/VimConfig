@@ -5,6 +5,9 @@ vim.pack.add({
   { src = 'https://github.com/windwp/nvim-autopairs', name = 'Autopairs' },
   { src = 'https://github.com/nvim-lualine/lualine.nvim', name = 'Lualine' },
   { src = 'https://github.com/neanias/everforest-nvim', name = 'Everforest' },
+  { src = 'https://github.com/nvim-lua/plenary.nvim', name = 'Plenary' },
+  { src = 'https://github.com/nvim-telescope/telescope.nvim', name = 'Telescope' },
+  { src = 'https://github.com/linux-cultist/venv-selector.nvim', name = 'VenvSelector' },
   { src = 'https://github.com/nvim-mini/mini.align', version = 'stable', name = "MiniAlign" },
 })
 
@@ -33,3 +36,13 @@ require('lualine').setup {
 }
 
 require('mini.align').setup()
+
+require('telescope').setup()
+local tele = require('telescope.builtin')
+vim.keymap.set('n', '<leader>ff', tele.find_files, { desc = 'Telescope find files' })
+vim.keymap.set('n', '<leader>fgf', tele.git_files, { desc = 'Telescope files in current git repo' })
+vim.keymap.set('n', '<leader>fgb', tele.git_branches, { desc = 'Telescope git branches' })
+vim.keymap.set('n', '<leader>fb', tele.buffers, { desc = 'Telescope buffers' })
+vim.keymap.set('n', '<leader>fh', tele.help_tags, { desc = 'Telescope help tags' })
+
+require('venv-selector').setup()

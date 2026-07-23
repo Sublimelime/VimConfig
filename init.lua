@@ -18,6 +18,7 @@ end
 
 vim.cmd("filetype indent plugin on")
 vim.cmd("syntax on")
+vim.cmd("cd ~")
 
 local opt = vim.opt
 
@@ -95,6 +96,11 @@ if vim.g.os == "Windows" then
     for option, value in pairs(powershell_options) do
         vim.opt[option] = value
     end
+end
+
+-- Neovide config options
+if vim.g.neovide then
+    vim.o.guifont = "Cascadia Mono:h10"
 end
 
 

@@ -16,6 +16,18 @@
       "rev": "8cebe89d82f20e6d21b27346bcde4b4b6244a9f1",
       "src": "https://github.com/nvim-mini/mini.align",
       "version": "'stable'"
+    },
+    "Plenary": {
+      "rev": "74b06c6c75e4eeb3108ec01852001636d85a932b",
+      "src": "https://github.com/nvim-lua/plenary.nvim"
+    },
+    "Telescope": {
+      "rev": "427b576c16792edad01a92b89721d923c19ad60f",
+      "src": "https://github.com/nvim-telescope/telescope.nvim"
+    },
+    "VenvSelector": {
+      "rev": "cc4bb3975de8835291f9bb45889e96c6b2795fc4",
+      "src": "https://github.com/linux-cultist/venv-selector.nvim"
     }
   }
 }

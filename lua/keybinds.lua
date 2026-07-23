@@ -3,16 +3,6 @@ local map = vim.keymap.set
 -- Word count
 map("n", "<leader>wc", "g<C-g>")
 
--- Toggle syntax highlighting
-map("n", "<leader>sy", function()
-    if vim.g.syntax_on then
-        vim.cmd("syntax off")
-    else
-        vim.cmd("syntax enable")
-    end
-end, { silent = true })
-
-
 -- Clear search highlighting
 map("n", "<Space>", "<cmd>nohlsearch<CR>")
 
@@ -62,6 +52,8 @@ map("n", "L", "$")
 
 --Sudo write
 map("c", "w!!", "w !sudo tee %")
+
+map('t', '<Esc>', '<C-\\><C-n>', {noremap = true}) -- Easier to escape terminal mode
 
 --------------------------------------------------
 -- Extra text objects
