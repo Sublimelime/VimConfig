@@ -200,6 +200,7 @@ end
 
 require("keybinds")
 require("abbrevs")
+require("plugins")
 
 --------------------------------------------------
 -- Autocommands
