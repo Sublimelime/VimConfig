@@ -9,6 +9,7 @@ vim.pack.add({
   { src = 'https://github.com/nvim-telescope/telescope.nvim', name = 'Telescope' },
   { src = 'https://github.com/linux-cultist/venv-selector.nvim', name = 'VenvSelector' },
   { src = 'https://github.com/neovim/nvim-lspconfig', name = "LSPConfig"},
+  { src = 'https://github.com/nvim-treesitter/nvim-treesitter', name = "Treesitter"},
   { src = 'https://github.com/nvim-mini/mini.align', version = 'stable', name = "MiniAlign" },
   { src = 'https://github.com/nvim-mini/mini.completion', version = 'stable', name = "MiniComplete" },
 })
@@ -98,3 +99,16 @@ vim.lsp.config("tailwindcss", {
 })
 
 vim.lsp.enable("tailwindcss")
+
+-- Treesitter
+vim.env.CC = vim.fn.exepath("clang")
+require('nvim-treesitter').install { 'vue', 'python', 'typescript', 'lua', 'javascript' }
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'lua', 'python', 'typescript', 'vue' },
+  callback = function()
+    vim.treesitter.start()
+    vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+    vim.wo.foldmethod = 'expr'
+    vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+  end,
+})
