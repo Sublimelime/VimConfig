@@ -21,6 +21,11 @@
       "src": "https://github.com/nvim-mini/mini.align",
       "version": "'stable'"
     },
+    "MiniComplete": {
+      "rev": "0aeee1231b90d70563e24facc238ab4359b8d5fc",
+      "src": "https://github.com/nvim-mini/mini.completion",
+      "version": "'stable'"
+    },
     "Plenary": {
       "rev": "74b06c6c75e4eeb3108ec01852001636d85a932b",
       "src": "https://github.com/nvim-lua/plenary.nvim"

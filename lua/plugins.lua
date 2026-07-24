@@ -10,6 +10,7 @@ vim.pack.add({
   { src = 'https://github.com/linux-cultist/venv-selector.nvim', name = 'VenvSelector' },
   { src = 'https://github.com/neovim/nvim-lspconfig', name = "LSPConfig"},
   { src = 'https://github.com/nvim-mini/mini.align', version = 'stable', name = "MiniAlign" },
+  { src = 'https://github.com/nvim-mini/mini.completion', version = 'stable', name = "MiniComplete" },
 })
 
 
@@ -37,6 +38,14 @@ require('lualine').setup {
 }
 
 require('mini.align').setup()
+
+require('mini.completion').setup()
+-- Enables tab to navigate completion
+local imap_expr = function(lhs, rhs)
+  vim.keymap.set('i', lhs, rhs, { expr = true })
+end
+imap_expr('<Tab>',   [[pumvisible() ? "\<C-n>" : "\<Tab>"]])
+imap_expr('<S-Tab>', [[pumvisible() ? "\<C-p>" : "\<S-Tab>"]])
 
 
 require('telescope').setup()
