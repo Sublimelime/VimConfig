@@ -88,3 +88,13 @@ vim.lsp.config('vtsls', {
 vim.lsp.enable("vtsls")
 vim.lsp.enable('vue_ls')
 vim.lsp.enable('pyright')
+
+vim.lsp.config("tailwindcss", {
+    settings = {
+        tailwindCSS = {
+            colorDecorators = true,
+        },
+    },
+})
+
+vim.lsp.enable("tailwindcss")
