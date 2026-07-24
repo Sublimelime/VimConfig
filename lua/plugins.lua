@@ -88,7 +88,11 @@ vim.lsp.config('vtsls', {
 
 vim.lsp.enable("vtsls")
 vim.lsp.enable('vue_ls')
-vim.lsp.enable('pyright')
+
+vim.lsp.config("basedpyright", {
+    cmd = { "basedpyright-langserver", "--stdio" },
+})
+vim.lsp.enable("basedpyright")
 
 vim.lsp.config("tailwindcss", {
     settings = {
