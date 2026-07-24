@@ -78,6 +78,7 @@ opt.list = false
 opt.listchars = { tab = "|." }
 opt.synmaxcol = 1000
 opt.laststatus = 2
+opt.signcolumn = "yes"
 opt.diffopt:append("iwhiteall")
 vim.g.mapleader = "-"
 vim.g.maplocalleader = "\\"

@@ -58,6 +58,17 @@ vim.keymap.set('n', '<leader>fh', tele.help_tags, { desc = 'Telescope help tags'
 
 require('venv-selector').setup()
 
+--------------------------------------------------------------------------------------
+--- LSP Configs
+------------------------------------------------------------------------------
+
+-- Only shows underlines for errors, not warnings
+vim.diagnostic.config({
+    underline = {
+        severity = vim.diagnostic.severity.ERROR,
+    },
+})
+
 local npm_root = vim.fn.trim(vim.fn.system("npm root -g"))
 vim.lsp.config("vue_ls", {
     init_options = {
@@ -91,6 +102,17 @@ vim.lsp.enable('vue_ls')
 
 vim.lsp.config("basedpyright", {
     cmd = { "basedpyright-langserver", "--stdio" },
+    settings = {
+        basedpyright = {
+            disableOrganizeImports = false,
+            analysis = {
+                typeCheckingMode = "basic",
+                diagnosticSeverityOverrides = {
+                    reportAny = "none",
+                },
+            },
+        },
+    },
 })
 vim.lsp.enable("basedpyright")
 
