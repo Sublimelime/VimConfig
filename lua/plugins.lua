@@ -3,6 +3,7 @@
 
 vim.pack.add({
   { src = 'https://github.com/windwp/nvim-autopairs', name = 'Autopairs' },
+  { src = 'https://github.com/windwp/nvim-ts-autotag', name = 'Autotag' },
   { src = 'https://github.com/nvim-lualine/lualine.nvim', name = 'Lualine' },
   { src = 'https://github.com/neanias/everforest-nvim', name = 'Everforest' },
   { src = 'https://github.com/nvim-lua/plenary.nvim', name = 'Plenary' },
@@ -57,6 +58,8 @@ vim.keymap.set('n', '<leader>b', tele.buffers, { desc = 'Telescope buffers' })
 vim.keymap.set('n', '<leader>fh', tele.help_tags, { desc = 'Telescope help tags' })
 
 require('venv-selector').setup()
+
+require("nvim-ts-autotag").setup()
 
 --------------------------------------------------------------------------------------
 --- LSP Configs
