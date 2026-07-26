@@ -83,6 +83,8 @@ opt.diffopt:append("iwhiteall")
 vim.g.mapleader = "-"
 vim.g.maplocalleader = "\\"
 opt.background = "dark"
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_python3_provider = 0
 
 -- Fix nvim terminal when running in powershell
 if vim.g.os == "Windows" then

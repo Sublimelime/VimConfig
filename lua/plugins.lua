@@ -2,30 +2,30 @@
 
 
 vim.pack.add({
-  { src = 'https://github.com/windwp/nvim-autopairs', name = 'Autopairs' },
-  { src = 'https://github.com/windwp/nvim-ts-autotag', name = 'Autotag' },
-  { src = 'https://github.com/nvim-lualine/lualine.nvim', name = 'Lualine' },
-  { src = 'https://github.com/neanias/everforest-nvim', name = 'Everforest' },
-  { src = 'https://github.com/nvim-lua/plenary.nvim', name = 'Plenary' },
-  { src = 'https://github.com/nvim-telescope/telescope.nvim', name = 'Telescope' },
-  { src = 'https://github.com/linux-cultist/venv-selector.nvim', name = 'VenvSelector' },
-  { src = 'https://github.com/neovim/nvim-lspconfig', name = "LSPConfig"},
-  { src = 'https://github.com/nvim-treesitter/nvim-treesitter', name = "Treesitter"},
-  { src = 'https://github.com/nvim-mini/mini.align', version = 'stable', name = "MiniAlign" },
-  { src = 'https://github.com/nvim-mini/mini.completion', version = 'stable', name = "MiniComplete" },
+    { src = 'https://github.com/windwp/nvim-autopairs', name = 'Autopairs' },
+    { src = 'https://github.com/windwp/nvim-ts-autotag', name = 'Autotag' },
+    { src = 'https://github.com/nvim-lualine/lualine.nvim', name = 'Lualine' },
+    --  { src = 'https://github.com/neanias/everforest-nvim', name = 'Everforest' },
+    { src = 'https://github.com/ember-theme/nvim', name = 'Ember' },
+    { src = 'https://github.com/nvim-lua/plenary.nvim', name = 'Plenary' },
+    { src = 'https://github.com/nvim-telescope/telescope.nvim', name = 'Telescope' },
+    { src = 'https://github.com/linux-cultist/venv-selector.nvim', name = 'VenvSelector' },
+    { src = 'https://github.com/neovim/nvim-lspconfig', name = "LSPConfig"},
+    { src = 'https://github.com/nvim-treesitter/nvim-treesitter', name = "Treesitter"},
+    { src = 'https://github.com/nvim-mini/mini.align', version = 'stable', name = "MiniAlign" },
+    { src = 'https://github.com/nvim-mini/mini.completion', version = 'stable', name = "MiniComplete" },
 })
 
+-- Color scheme
+vim.cmd.colorscheme("ember")
 
 -- Configs and setup ------------------------------------------------------
 
 require("nvim-autopairs").setup({ map_bs = false, map_cr = false })
 
-require("everforest").setup({ background = "hard" })
-require("everforest").load()
-
 require('lualine').setup {
     options = {
-        theme = 'everforest',
+        theme = 'gruvbox-material',
         icons_enabled = false,
         globalstatus = true,
         section_separators = '',
@@ -35,7 +35,24 @@ require('lualine').setup {
         -- [abc]defghijklmnopqrstuvw[xyz]
         -- using lualine_? configures that position above
         -- [] are used already
-        lualine_w = {{ 'searchcount', maxcount = 500, timeout = 500, }}
+        lualine_d = {
+            {
+                'lsp_status',
+                icon = '$',
+                symbols = {
+                    -- Standard unicode symbols to cycle through for LSP progress:
+                    spinner = { '⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏' },
+                    -- Standard unicode symbol for when LSP is done:
+                    done = '✓',
+                    -- Delimiter inserted between LSP names:
+                    separator = ' ',
+                },
+                -- List of LSP names to ignore (e.g., `null-ls`):
+                ignore_lsp = {},
+                -- Display the LSP name
+                show_name = true,
+            }
+        }
     }
 }
 
@@ -44,7 +61,7 @@ require('mini.align').setup()
 require('mini.completion').setup()
 -- Enables tab to navigate completion
 local imap_expr = function(lhs, rhs)
-  vim.keymap.set('i', lhs, rhs, { expr = true })
+    vim.keymap.set('i', lhs, rhs, { expr = true })
 end
 imap_expr('<Tab>',   [[pumvisible() ? "\<C-n>" : "\<Tab>"]])
 imap_expr('<S-Tab>', [[pumvisible() ? "\<C-p>" : "\<S-Tab>"]])
@@ -56,6 +73,7 @@ vim.keymap.set('n', '<leader>ff', tele.find_files, { desc = 'Telescope find file
 vim.keymap.set('n', '<leader>fb', tele.git_branches, { desc = 'Telescope git branches' })
 vim.keymap.set('n', '<leader>b', tele.buffers, { desc = 'Telescope buffers' })
 vim.keymap.set('n', '<leader>fh', tele.help_tags, { desc = 'Telescope help tags' })
+vim.keymap.set('n', '<leader>fs', tele.lsp_workspace_symbols, { desc = 'Telescope lsp symbols' })
 
 require('venv-selector').setup()
 
@@ -82,22 +100,22 @@ vim.lsp.config("vue_ls", {
 })
 
 local vue_plugin = {
-  name = '@vue/typescript-plugin',
-  location = npm_root .. '/@vue/language-server',
-  languages = { 'vue' },
-  configNamespace = 'typescript',
+    name = '@vue/typescript-plugin',
+    location = npm_root .. '/@vue/language-server',
+    languages = { 'vue' },
+    configNamespace = 'typescript',
 }
 vim.lsp.config('vtsls', {
-  settings = {
-    vtsls = {
-      tsserver = {
-        globalPlugins = {
-          vue_plugin,
+    settings = {
+        vtsls = {
+            tsserver = {
+                globalPlugins = {
+                    vue_plugin,
+                },
+            },
         },
-      },
     },
-  },
-  filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
+    filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
 })
 
 vim.lsp.enable("vtsls")
@@ -133,11 +151,11 @@ vim.lsp.enable("tailwindcss")
 vim.env.CC = vim.fn.exepath("clang")
 require('nvim-treesitter').install { 'vue', 'python', 'typescript', 'lua', 'javascript' }
 vim.api.nvim_create_autocmd('FileType', {
-  pattern = { 'lua', 'python', 'typescript', 'vue' },
-  callback = function()
-    vim.treesitter.start()
-    vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-    vim.wo.foldmethod = 'expr'
-    vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-  end,
+    pattern = { 'lua', 'python', 'typescript', 'vue' },
+    callback = function()
+        vim.treesitter.start()
+        vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+        vim.wo.foldmethod = 'expr'
+        vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+    end,
 })
