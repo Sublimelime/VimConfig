@@ -53,10 +53,9 @@ opt.ttimeoutlen = 1500
 opt.timeout = true
 opt.updatetime = 700
 opt.path:append("**")
-opt.foldcolumn = "1"
+opt.foldcolumn = "0"
 opt.foldmethod = "indent"
-opt.foldlevelstart = 99
-opt.foldnestmax = 5
+opt.foldlevelstart = 1
 opt.modeline = false
 opt.modelines = 1
 opt.tabstop = 4
@@ -76,7 +75,6 @@ opt.spell = false
 opt.encoding = "utf-8"
 opt.list = false
 opt.listchars = { tab = "|." }
-opt.synmaxcol = 1000
 opt.laststatus = 2
 opt.signcolumn = "yes"
 opt.diffopt:append("iwhiteall")
