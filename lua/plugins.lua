@@ -14,6 +14,7 @@ vim.pack.add({
     { src = 'https://github.com/nvim-treesitter/nvim-treesitter', name = "Treesitter"},
     { src = 'https://github.com/nvim-mini/mini.align', version = 'stable', name = "MiniAlign" },
     { src = 'https://github.com/nvim-mini/mini.completion', version = 'stable', name = "MiniComplete" },
+    { src = 'https://github.com/tpope/vim-fugitive', name = "Fugitive"},
 })
 
 -- Color scheme
