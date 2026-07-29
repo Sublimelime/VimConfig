@@ -31,6 +31,7 @@ opt.title = true
 opt.autoread = true
 opt.autoindent = true
 opt.ruler = true
+opt.splitright = true
 opt.hidden = true
 opt.lazyredraw = true
 opt.showmatch = true
