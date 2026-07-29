@@ -12,6 +12,14 @@ map("n", "<leader>i", "mzgg=G`z")
 -- Copy text left of cursor onto new line
 map("n", "<leader>o", 'v^yo<C-r>"')
 
+-- Close help with escape
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "help",
+    callback = function(ev)
+        map("n", "<Esc>", "<C-w>c", { buf = ev.buf })
+    end,
+})
+
 --------------------------------------------------
 -- Insert mode
 --------------------------------------------------
