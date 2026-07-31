@@ -56,7 +56,7 @@ opt.updatetime = 700
 opt.path:append("**")
 opt.foldcolumn = "0"
 opt.foldmethod = "indent"
-opt.foldlevelstart = 1
+opt.foldlevelstart = 99
 opt.modeline = false
 opt.modelines = 1
 opt.tabstop = 4

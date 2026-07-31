@@ -32,29 +32,11 @@ require('lualine').setup {
         section_separators = '',
         component_separators = ''
     },
-    sections = {
-        -- [abc]defghijklmnopqrstuvw[xyz]
-        -- using lualine_? configures that position above
-        -- [] are used already
-        lualine_d = {
-            {
-                'lsp_status',
-                icon = '$',
-                symbols = {
-                    -- Standard unicode symbols to cycle through for LSP progress:
-                    spinner = { '⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏' },
-                    -- Standard unicode symbol for when LSP is done:
-                    done = '✓',
-                    -- Delimiter inserted between LSP names:
-                    separator = ' ',
-                },
-                -- List of LSP names to ignore (e.g., `null-ls`):
-                ignore_lsp = {},
-                -- Display the LSP name
-                show_name = true,
-            }
-        }
-    }
+    -- sections = {
+    --     -- [abc]defghijklmnopqrstuvw[xyz]
+    --     -- using lualine_? configures that position above
+    --     -- [] are used already
+    -- }
 }
 
 require('mini.align').setup()
@@ -128,10 +110,14 @@ vim.lsp.config("basedpyright", {
         basedpyright = {
             disableOrganizeImports = false,
             analysis = {
+                autoImportCompletions = false,
                 typeCheckingMode = "basic",
+                useLibraryCodeForTypes = false,
                 diagnosticSeverityOverrides = {
+                    reportUnusedImport = "warning",
                     reportAny = "none",
                 },
+                exclude = { "cdk.out", "**/.*", "**/__pycache__", "node_modules", },
             },
         },
     },
