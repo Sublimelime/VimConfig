@@ -104,26 +104,16 @@ vim.lsp.config('vtsls', {
 vim.lsp.enable("vtsls")
 vim.lsp.enable('vue_ls')
 
-vim.lsp.config("basedpyright", {
-    cmd = { "basedpyright-langserver", "--stdio" },
-    settings = {
-        basedpyright = {
-            disableOrganizeImports = false,
-            analysis = {
-                autoImportCompletions = false,
-                typeCheckingMode = "basic",
-                useLibraryCodeForTypes = false,
-                diagnosticSeverityOverrides = {
-                    reportUnusedImport = "warning",
-                    reportAny = "none",
-                },
-                exclude = { "cdk.out", "**/.*", "**/__pycache__", "node_modules", },
-            },
-        },
-    },
+-- Python
+vim.lsp.config('zubanls', {
+	name = "ZubanLS",
+	cmd = { "zuban", "server" },
+	root_markers = { "pyproject.toml", ".git" },
+	filetypes = { "python" },
 })
-vim.lsp.enable("basedpyright")
+vim.lsp.enable("zubanls")
 
+-- Tailwind
 vim.lsp.config("tailwindcss", {
     settings = {
         tailwindCSS = {
@@ -131,7 +121,6 @@ vim.lsp.config("tailwindcss", {
         },
     },
 })
-
 vim.lsp.enable("tailwindcss")
 
 -- Treesitter

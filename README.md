@@ -10,5 +10,10 @@ External programs needed:
 
 NPM global installs:
 
-npm install -g tree-sitter-cli @vtsls/language-server@0.3.0 @vue/language-server@3.3.7 neovim@5.4.0 basedpyright typescript-language-server@5.3.0 typescript@6.0.3 @tailwindcss/language-server@0.16.0
+    npm install -g tree-sitter-cli @vtsls/language-server@0.3.0 @vue/language-server@3.3.7 neovim@5.4.0 typescript-language-server@5.3.0 typescript@6.0.3 @tailwindcss/language-server@0.16.0
 
+Pip installs (global):
+
+    pip(x) install zuban
+
+Pip installs (local):
