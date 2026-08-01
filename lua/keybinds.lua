@@ -20,6 +20,14 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
+-- LSP stuff
+map("n", "gd", vim.lsp.buf.definition, { desc="Go to definition"})
+map("n", "gD", vim.lsp.buf.declaration, { desc="Go to declaration"})
+map("n", "gi", vim.lsp.buf.implementation, { desc="Go to implementation"})
+map("n", "grr", vim.lsp.buf.references, { desc="Go to references"})
+map("n", "grn", vim.lsp.buf.rename, { desc="Rename symbol"})
+map("n", "gca", vim.lsp.buf.code_action, { desc="Code action"})
+
 --------------------------------------------------
 -- Insert mode
 --------------------------------------------------

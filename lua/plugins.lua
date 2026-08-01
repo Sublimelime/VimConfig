@@ -71,6 +71,14 @@ vim.diagnostic.config({
     underline = {
         severity = vim.diagnostic.severity.ERROR,
     },
+    virtual_text = {
+        severity = {
+            min = vim.diagnostic.severity.HINT,
+            max = vim.diagnostic.severity.WARN,
+        },
+        spacing = 2,
+    },
+    signs = true,
 })
 
 local npm_root = vim.fn.trim(vim.fn.system("npm root -g"))
@@ -105,13 +113,19 @@ vim.lsp.enable("vtsls")
 vim.lsp.enable('vue_ls')
 
 -- Python
-vim.lsp.config('zubanls', {
-	name = "ZubanLS",
-	cmd = { "zuban", "server" },
-	root_markers = { "pyproject.toml", ".git" },
-	filetypes = { "python" },
+vim.lsp.config('pyrefly', {
+    settings = {
+        python = {
+            pyrefly = {
+                typeCheckingMode = 'default',
+                analysis = {
+                    showHoverGoToLinks = false,
+                },
+            },
+        }
+    }
 })
-vim.lsp.enable("zubanls")
+vim.lsp.enable('pyrefly')
 
 -- Tailwind
 vim.lsp.config("tailwindcss", {

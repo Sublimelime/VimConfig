@@ -14,6 +14,6 @@ NPM global installs:
 
 Pip installs (global):
 
-    pip(x) install zuban
+    pip(x) install pyrefly
 
 Pip installs (local):
