@@ -3,10 +3,9 @@
 
 vim.pack.add({
     { src = 'https://github.com/windwp/nvim-autopairs', name = 'Autopairs' },
-    { src = 'https://github.com/windwp/nvim-ts-autotag', name = 'Autotag' },
+    { src = 'https://github.com/windwp/nvim-ts-autotag', name = 'Autotag' }, -- For html tag autoclose
     { src = 'https://github.com/nvim-lualine/lualine.nvim', name = 'Lualine' },
-    --  { src = 'https://github.com/neanias/everforest-nvim', name = 'Everforest' },
-    { src = 'https://github.com/ember-theme/nvim', name = 'Ember' },
+    { src = 'https://github.com/ember-theme/nvim', name = 'Ember-theme' },
     { src = 'https://github.com/nvim-lua/plenary.nvim', name = 'Plenary' },
     { src = 'https://github.com/nvim-telescope/telescope.nvim', name = 'Telescope' },
     { src = 'https://github.com/linux-cultist/venv-selector.nvim', name = 'VenvSelector' },
@@ -48,7 +47,6 @@ local imap_expr = function(lhs, rhs)
 end
 imap_expr('<Tab>',   [[pumvisible() ? "\<C-n>" : "\<Tab>"]])
 imap_expr('<S-Tab>', [[pumvisible() ? "\<C-p>" : "\<S-Tab>"]])
-
 
 require('telescope').setup()
 local tele = require('telescope.builtin')
@@ -139,13 +137,13 @@ vim.lsp.enable("tailwindcss")
 
 -- Treesitter
 vim.env.CC = vim.fn.exepath("clang")
-require('nvim-treesitter').install { 'vue', 'python', 'typescript', 'lua', 'javascript' }
+require('nvim-treesitter').install { 'vue', 'python', 'typescript', 'lua', 'javascript', 'html' }
 vim.api.nvim_create_autocmd('FileType', {
-    pattern = { 'lua', 'python', 'typescript', 'vue' },
+    pattern = { 'lua', 'python', 'typescript', 'vue', 'html' },
     callback = function()
         vim.treesitter.start()
-        vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-        vim.wo.foldmethod = 'expr'
-        vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+        vim.opt_local.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+        vim.opt_local.foldmethod = 'expr'
+        vim.opt_local.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
     end,
 })

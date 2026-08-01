@@ -217,30 +217,6 @@ require("plugins")
 
 local misc = vim.api.nvim_create_augroup("misc", { clear = true })
 
-vim.api.nvim_create_autocmd("FileType", {
-    group = misc,
-    pattern = "vim",
-    command = "setlocal foldmethod=marker",
-})
-
-vim.api.nvim_create_autocmd("FileType", {
-    group = misc,
-    pattern = "conf",
-    command = "setlocal nowrap foldmethod=marker",
-})
-
-vim.api.nvim_create_autocmd("FileType", {
-    group = misc,
-    pattern = "gitcommit",
-    command = "setlocal nobackup noswapfile",
-})
-
-vim.api.nvim_create_autocmd("FileType", {
-    group = misc,
-    pattern = "help",
-    command = "setlocal nospell",
-})
-
 vim.api.nvim_create_autocmd("BufWritePre", {
     group = misc,
     callback = strip_whitespace,
