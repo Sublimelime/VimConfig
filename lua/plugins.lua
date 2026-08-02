@@ -5,7 +5,7 @@ vim.pack.add({
     { src = 'https://github.com/windwp/nvim-autopairs', name = 'Autopairs' },
     { src = 'https://github.com/windwp/nvim-ts-autotag', name = 'Autotag' }, -- For html tag autoclose
     { src = 'https://github.com/nvim-lualine/lualine.nvim', name = 'Lualine' },
-    { src = 'https://github.com/ember-theme/nvim', name = 'Ember-theme' },
+    { src = 'https://github.com/ember-theme/nvim', name = 'Ember' },
     { src = 'https://github.com/nvim-lua/plenary.nvim', name = 'Plenary' },
     { src = 'https://github.com/nvim-telescope/telescope.nvim', name = 'Telescope' },
     { src = 'https://github.com/linux-cultist/venv-selector.nvim', name = 'VenvSelector' },
@@ -14,6 +14,7 @@ vim.pack.add({
     { src = 'https://github.com/nvim-mini/mini.align', version = 'stable', name = "MiniAlign" },
     { src = 'https://github.com/nvim-mini/mini.completion', version = 'stable', name = "MiniComplete" },
     { src = 'https://github.com/tpope/vim-fugitive', name = "Fugitive"},
+    { src = 'https://github.com/mason-org/mason.nvim', name = "Mason"},
 })
 
 -- Color scheme
@@ -63,6 +64,8 @@ require("nvim-ts-autotag").setup()
 --------------------------------------------------------------------------------------
 --- LSP Configs
 ------------------------------------------------------------------------------
+-- Mason first
+require("mason").setup()
 
 -- Only shows underlines for errors, not warnings
 vim.diagnostic.config({
