@@ -12,10 +12,6 @@
       "rev": "7365b8dede43a82ed1df741275b75333422e5402",
       "src": "https://github.com/ember-theme/nvim"
     },
-    "Everforest": {
-      "rev": "d235ca0aa6a29546e661a020e2618612acbbffbe",
-      "src": "https://github.com/neanias/everforest-nvim"
-    },
     "Fugitive": {
       "rev": "3b753cf8c6a4dcde6edee8827d464ba9b8c4a6f0",
       "src": "https://github.com/tpope/vim-fugitive"

@@ -128,6 +128,7 @@ vim.lsp.config('pyrefly', {
 })
 vim.lsp.enable('pyrefly')
 
+
 -- Tailwind
 vim.lsp.config("tailwindcss", {
     settings = {
@@ -140,9 +141,9 @@ vim.lsp.enable("tailwindcss")
 
 -- Treesitter
 vim.env.CC = vim.fn.exepath("clang")
-require('nvim-treesitter').install { 'vue', 'python', 'typescript', 'lua', 'javascript', 'html' }
+require('nvim-treesitter').install { 'vue', 'python', 'typescript', 'lua', 'javascript', 'css', 'html' }
 vim.api.nvim_create_autocmd('FileType', {
-    pattern = { 'lua', 'python', 'typescript', 'vue', 'html' },
+    pattern = { 'lua', 'python', 'typescript', 'vue', 'css', 'html' },
     callback = function()
         vim.treesitter.start()
         vim.opt_local.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
