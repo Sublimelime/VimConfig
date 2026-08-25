@@ -199,7 +199,7 @@ end, {})
 --------------------------------------------------
 
 if vim.fn.executable("rg") == 1 then
-    opt.grepprg = "rg"
+    opt.grepprg = "rg --vimgrep --smart-case"
     opt.grepformat = "%f:%l:%c:%m,%f:%l:%m"
 end
 
@@ -215,10 +215,10 @@ require("plugins")
 -- Autocommands
 --------------------------------------------------
 
-local misc = vim.api.nvim_create_augroup("misc", { clear = true })
+local misc_augroup = vim.api.nvim_create_augroup("misc", { clear = true })
 
 vim.api.nvim_create_autocmd("BufWritePre", {
-    group = misc,
+    group = misc_augroup,
     callback = strip_whitespace,
 })
 
@@ -242,6 +242,30 @@ vim.api.nvim_create_autocmd("CursorHold", {
         })
     end,
 })
+
+--------------------------------------------------
+-- Better :grep handling (disabled, not quite working)
+--------------------------------------------------
+-- local grep_augroup = vim.api.nvim_create_augroup("better_grep", { clear = true })
+-- -- Using :grep or :vimgrep creates new tab
+-- vim.api.nvim_create_autocmd("QuickFixCmdPre", {
+--     group = grep_augroup,
+--     pattern = { "grep", "vimgrep" },
+--     callback = function()
+--         vim.cmd("tab split")
+--     end,
+-- })
+--
+-- -- Auto-open quickfix list when using :grep
+-- vim.api.nvim_create_autocmd("QuickFixCmdPost", {
+--     group = grep_augroup,
+--     pattern = { "grep", "vimgrep" },
+--     callback = function()
+--         if vim.fn.getqflist({ size = 0 }).size > 0 then
+--             vim.cmd("copen")
+--         end
+--     end,
+-- })
 
 --------------------------------------------------
 -- Number toggle

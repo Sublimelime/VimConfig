@@ -52,10 +52,8 @@ imap_expr('<S-Tab>', [[pumvisible() ? "\<C-p>" : "\<S-Tab>"]])
 require('telescope').setup()
 local tele = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ff', tele.find_files, { desc = 'Telescope find files' })
-vim.keymap.set('n', '<leader>fb', tele.git_branches, { desc = 'Telescope git branches' })
 vim.keymap.set('n', '<leader>b', tele.buffers, { desc = 'Telescope buffers' })
-vim.keymap.set('n', '<leader>fh', tele.help_tags, { desc = 'Telescope help tags' })
-vim.keymap.set('n', '<leader>fs', tele.lsp_workspace_symbols, { desc = 'Telescope lsp symbols' })
+vim.keymap.set('n', '<leader>fs', tele.live_grep, { desc = 'Telescope live grep' })
 
 require('venv-selector').setup()
 
